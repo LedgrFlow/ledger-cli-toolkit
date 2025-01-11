@@ -5,8 +5,8 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(
-    name="ledgerpy",
-    version="0.7.0",  # Cambia según el versionado de tu proyecto
+    name="ledger-cli-toolkit",
+    version="0.7.2",  # Cambia según el versionado de tu proyecto
     author="Eduardo Rangel",
     author_email="dante61918@gmail.com",
     description="Librería para manipular archivos de contabilidad en formato .ledger.",

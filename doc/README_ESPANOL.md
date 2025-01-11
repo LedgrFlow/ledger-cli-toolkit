@@ -45,7 +45,7 @@ El proyecto nació de la necesidad de contar con una herramienta para manipular 
 Puedes instalar `ledgerpy` fácilmente desde PyPI con el siguiente comando:
 
 ```bash
-pip install ledgerpy
+pip install ledger-cli-toolkit
 ```
 
 ## Ejemplos de uso
@@ -53,7 +53,7 @@ pip install ledgerpy
 ### Leer y convertir un archivo `.ledger` a JSON
 
 ```python
-from ledgerpy import LedgerParser
+from ledger_cli import LedgerParser
 
 # Crear una instancia del parser
 parser = LedgerParser("mi_archivo.ledger")

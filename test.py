@@ -1,5 +1,5 @@
-from ledgerpy import LedgerVisual
-from ledgerpy import LedgerParser
+from ledger_cli import LedgerVisual
+from ledger_cli import LedgerParser
 import json
 
 if __name__ == "__main__":

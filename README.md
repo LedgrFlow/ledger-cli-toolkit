@@ -1,4 +1,4 @@
-<h1 align="center" >LedgerPY</h1>
+<h1 align="center" >ledger-cli-toolkit</h1>
 
 <p align="center">Ledger file manipulation library</p>
 
@@ -54,8 +54,8 @@ Plugin: LedgerVisual: An additional module that allows the visualization of acco
 
 You can easily install `ledgerpy` from PyPI with the following command:
 
-```tap
-pip install ledger
+```bash
+pip install ledger-cli-toolkit
 ```
 
 ## Usage Examples
@@ -63,7 +63,7 @@ pip install ledger
 ### Read and Convert a `.ledger` File to JSON
 
 ```python
-from ledgerpy import LedgerParser
+from ledger_cli import LedgerParser
 
 # Create a Parser Instance
 parser = LedgerParser("my_file.ledger")
