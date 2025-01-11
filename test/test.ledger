@@ -1,0 +1,79 @@
+2025/01/01 Apertura de cuentas
+    Assets:Cash                         USD 100.00
+    Assets:Bank:Nubank                MXN 5,000.00
+    Equity:OpeningBalance               USD 1,000.00
+    Liabilities:CreditCard:Nubank     MXN -2,500.00
+    Liabilities:CreditCard:Visa         USD -300.00
+    Liabilities:Debts:Personal          MXN -1,000.00
+
+2025/01/02 * Transferencia a cuenta bancaria
+    Assets:Bank:Chase                   USD 500.00
+    Assets:Cash                         USD -500.00
+
+2025/01/03 * Pago de tarjeta de crédito Nubank
+    Liabilities:CreditCard:Nubank      MXN 1,000.00
+    Assets:Bank:Nubank                 MXN -1,000.00
+
+2025/01/04 10:00:00 Compra de libros en Amazon
+    Expenses:Education:Books           USD 45.00
+    Liabilities:CreditCard:Visa        USD -45.00
+
+2025/01/04 15:00:00 Transferencia a cuenta de ahorro
+    Assets:Bank:Savings                MXN 3,000.00
+    Assets:Bank:Nubank                 MXN -3,000.00
+
+2025/01/05 Ingreso por proyecto freelance
+    Assets:Bank:Chase                  USD 800.00
+    Income:Freelance                   USD -800.00
+
+2025/01/06 Pago de deuda personal
+    Liabilities:Debts:Personal         MXN 500.00
+    Assets:Cash                        MXN -500.00
+
+2025/01/07 Cena en restaurante
+    Expenses:Dining                    USD 60.00
+    Assets:Cash                        USD -60.00
+
+2025/01/08 Gasto en transporte público
+    Expenses:Transportation            MXN 120.00
+    Assets:Cash                        MXN -120.00
+
+2025/01/09 Venta de artículos usados
+    Assets:Cash                        USD 150.00
+    Income:Other                       USD -150.00
+
+2025/01/10 Depósito de efectivo en banco
+    Assets:Bank:Nubank                 MXN 1,500.00
+    Assets:Cash                        MXN -1,500.00
+
+2025/01/11 Pago de servicios públicos
+    Expenses:Utilities                 MXN 750.00
+    Assets:Bank:Nubank                 MXN -750.00
+
+2025/01/12 Compras varias en supermercado
+    Expenses:Groceries                 USD 120.00
+    Liabilities:CreditCard:Visa        USD -120.00
+
+2025/01/13 Ingreso por bono
+    Assets:Bank:Chase                  USD 1,000.00
+    Income:Bonus                       USD -1,000.00
+
+2025/01/14 Ahorro extra
+    Assets:Bank:Savings                USD 400.00
+    Assets:Bank:Chase                  USD -400.00
+
+2025/01/15 Gasto en entretenimiento
+    Expenses:Entertainment             MXN 600.00
+    Assets:Cash                        MXN -600.00
+
+2025/01/16 Propina
+    Expenses:Tipping                   USD 10.00
+    Assets:Cash                        USD -10.00
+
+2025/01/17 Ingreso por renta de habitación
+    Assets:Bank:Nubank                 MXN 4,000.00
+    Income:Rent                        MXN -4,000.00
+
+2025/01/18 Transferencia para compra internacional
+    Assets:Bank:Chase                  USD -200.00
+    Assets:Bank:Nubank                 MXN 3,400.00
