@@ -1,3 +1,5 @@
+; TRANSACCIONES DE EJEMPLO
+
 2025/01/01 Apertura de cuentas
     Assets:Cash                         USD 100.00
     Assets:Bank:Nubank                MXN 5,000.00
@@ -77,3 +79,15 @@
 2025/01/18 Transferencia para compra internacional
     Assets:Bank:Chase                  USD -200.00
     Assets:Bank:Nubank                 MXN 3,400.00
+
+2025/01/18 Transferencia para compra internacional
+    Assets:Bank:Chase                  $-200.00
+    Assets:Bank:Nubank                 $3,400.00
+
+2025/01/18 Transferencia para compra internacional
+    Assets:Bank:Chase                  -$200.00
+    Assets:Bank:Nubank                 $3,400.00
+
+2025/01/18 Transferencia para compra internacional
+    Assets:Bank:Chase                  -200.00
+    Assets:Bank:Nubank                 3,400.00

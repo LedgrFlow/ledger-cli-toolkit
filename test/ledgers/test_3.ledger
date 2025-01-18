@@ -1,0 +1,75 @@
+; Archivo de ejemplo para Ledger
+; Fecha: 2025-01-18
+; Moneda: MXN
+
+; Definición de cuentas
+account Activos:Banco
+account Ingresos:Salarios
+account Gastos:Comida
+account Gastos:Transporte
+account Gastos:Entretenimiento
+account Pasivos:Tarjeta
+
+; Transacciones de ejemplo
+
+2025/01/01 Salario Mensual
+    Activos:Banco                      MXN 25,000.00
+    Ingresos:Salarios                
+
+2025-01-02 Compra de alimentos
+    Gastos:Comida                     MXN 1,200.00
+    Activos:Banco
+
+2025-01-03 Transporte público
+    Gastos:Transporte                  MXN 500.00
+    Activos:Banco
+
+2025-01-05 Cena en restaurante
+    Gastos:Comida                     MXN 750.00
+    Activos:Banco
+
+2025-01-07 Pago de tarjeta de crédito
+    Pasivos:Tarjeta                   MXN 5,000.00
+    Activos:Banco
+
+2025-01-08 Suscripción de streaming
+    Gastos:Entretenimiento             MXN 250.00
+    Activos:Banco
+
+2025-01-10 Transporte (taxi)
+    Gastos:Transporte                  MXN 300.00
+    Activos:Banco
+
+2025-01-12 Supermercado
+    Gastos:Comida                     MXN 2,100.00
+    Activos:Banco
+
+2025-01-15 Salario extra
+    Activos:Banco                     MXN 10,000.00
+    Ingresos:Salarios
+
+2025-01-16 Pago parcial tarjeta de crédito
+    Pasivos:Tarjeta                   MXN 3,000.00
+    Activos:Banco
+
+2025-01-17 Cine
+    Gastos:Entretenimiento             MXN 400.00
+    Activos:Banco
+
+2025-01-17 Gasolina
+    Gastos:Transporte                  MXN 1,000.00
+    Activos:Banco
+
+2025-01-18 Pago de luz
+    Gastos:Comida                     MXN 600.00
+    Activos:Banco
+
+2025-01-18 Comida rápida
+    Gastos:Comida                     MXN 800.00
+    Activos:Banco
+
+2025-01-18 Transporte privado
+    Gastos:Transporte                  MXN 450.00
+    Activos:Banco
+
+; Balance final en Activos:Banco: MXN 19,000.00

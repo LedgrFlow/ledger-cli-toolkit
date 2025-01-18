@@ -3,15 +3,17 @@ from typing import List, Dict, Union
 
 
 class LedgerVisual:
-    def __init__(self):
-        pass
 
+    @staticmethod
     def display_journal_table(
-        self,
         transactions_json: List[
             Dict[str, Union[str, List[Dict[str, Union[str, float]]]]]
         ],
         title_table="Ledger",
+        period: str = "2025",
+        label: str = "SUMAS IGUALES",
+        style: str = "simple",
+        headers: List[str] = ["N°", "Fecha", "Concepto", "Debe", "Haber"],
     ):
         """
         Display the transactions in a journal-like table format with columns:
@@ -44,17 +46,25 @@ class LedgerVisual:
                 total_credit += credit
 
         # Add SUMAS IGUALES row
-        table_data.append(["", "", "SUMAS IGUALES", total_debit, total_credit])
+        table_data.append(["", "", label, total_debit, total_credit])
 
-        headers = ["N°", "Fecha", "Concepto", "Debe", "Haber"]
         table = tabulate(
-            table_data, headers=headers, floatfmt=".2f", tablefmt="outline"
+            table_data,
+            headers=headers,
+            floatfmt=".2f",
+            tablefmt=style,
+            numalign="right",
         )
-        output = f"{title_table}\n{'=' * len(title_table)}\n{table}"
-        print(output)
+        # output = f"{title_table}\n{period}\n{'=' * len(title_table)}\n{table}"
+        print(table)
 
     @staticmethod
-    def display_general_balance(account_balances: Dict[str, Dict[str, float]]):
+    def display_general_balance(
+        account_balances: Dict[str, Dict[str, float]],
+        label="BALANCE GENERAL",
+        style="simple",
+        headers=["N°", "Concepto", "Unidad", "Saldo"],
+    ):
         table = []
         total_balance = 0.0
 
@@ -63,12 +73,89 @@ class LedgerVisual:
                 table.append([index, account, unit, f"{balance:.2f}"])
                 total_balance += balance
 
-        table.append(["", "BALANCE", "", f"{total_balance:.2f}"])
-        print(
-            tabulate(
-                table, headers=["N°", "Concepto", "Unidad", "Saldo"], tablefmt="outline"
-            )
-        )
+        table.append(["", label, "", f"{total_balance:.2f}"])
+        print(tabulate(table, headers=headers, tablefmt=style, numalign="right"))
+
+    @staticmethod
+    def display_accounts_list(
+        accounts: List[str],
+        style="simple",
+        headers=["N°", "Concepto"],
+    ):
+        table = []
+
+        for index, account in enumerate(accounts, start=1):
+            table.append([index, account])
+
+        print(tabulate(table, headers=headers, tablefmt=style, numalign="right"))
+
+    @staticmethod
+    def display_details_balances(
+        balances_details: Dict[str, Dict[str, Dict[str, float]]],
+        style="simple",
+        headers=["N°", "Concepto", "Unidad", "Saldo"],
+    ):
+        balance_total = 0
+
+        def traverse_accounts(accounts, parent_name="", n=1, balance_total=0):
+            rows = []
+            for account, details in accounts.items():
+
+                for unit, balance in details["balances"].items():
+                    concept = f"{parent_name} -> {account}" if parent_name else account
+                    balance = details["balances"][unit]
+                    balance_total += balance
+                    rows.append([n, concept, unit, balance])
+                    n += 1
+
+                # Recursively process sub-accounts
+                sub_rows, n = traverse_accounts(
+                    details.get("sub_accounts", {}),
+                    concept,
+                    n,
+                    balance_total=balance_total,
+                )
+                rows.extend(sub_rows)
+            return rows, n
+
+        # Traverse all top-level accounts
+        rows, _ = traverse_accounts(balances_details, balance_total=balance_total)
+        rows.append(["", "BALANCE FINAL", "", balance_total])
+        # Print the table
+        print(tabulate(rows, headers=headers, tablefmt=style, floatfmt=".2f"))
+
+    @staticmethod
+    def display_parents_balances(
+        balances_by_parents,
+        headers=["N°", "Concepto", "Unidad", "Saldo"],
+        style="simple",
+    ):
+        rows = []
+
+        for index, account in enumerate(balances_by_parents, start=1):
+
+            for unit in balances_by_parents[account]:
+                rows.append([index, account, unit, balances_by_parents[account][unit]])
+
+        print(tabulate(rows, headers=headers, tablefmt=style, floatfmt=".2f"))
+
+    @staticmethod
+    def print_balances(data):
+        rows = []
+
+        def process_account(name, account, level=0):
+            indent = "  " * level
+            for unit, balance in account.get("balances", {}).items():
+                rows.append([len(rows) + 1, f"{indent}{name}", unit, balance])
+
+            for sub_name, sub_account in account.get("sub_accounts", {}).items():
+                process_account(sub_name, sub_account, level + 1)
+
+        for main_account, account_data in data.items():
+            process_account(main_account, account_data)
+
+        headers = ["N", "Concepto", "Unidad", "Saldo"]
+        print(tabulate(rows, headers=headers, tablefmt="grid"))
 
 
 # Ejemplo de uso

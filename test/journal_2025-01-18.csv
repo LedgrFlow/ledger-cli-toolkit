@@ -1,0 +1,50 @@
+N°,Fecha,Concepto,Debe,Haber
+1,2025/01/01,Assets:Cash,100.0,0
+2,2025/01/01,Assets:Bank:Nubank,5000.0,0
+3,2025/01/01,Equity:OpeningBalance,1000.0,0
+4,2025/01/01,Liabilities:CreditCard:Nubank,0,2500.0
+5,2025/01/01,Liabilities:CreditCard:Visa,0,300.0
+6,2025/01/01,Liabilities:Debts:Personal,0,1000.0
+7,2025/01/02,Assets:Bank:Chase,500.0,0
+8,2025/01/02,Assets:Cash,0,500.0
+9,2025/01/03,Liabilities:CreditCard:Nubank,1000.0,0
+10,2025/01/03,Assets:Bank:Nubank,0,1000.0
+11,2025/01/04 10:00:00,Expenses:Education:Books,45.0,0
+12,2025/01/04 10:00:00,Liabilities:CreditCard:Visa,0,45.0
+13,2025/01/04 15:00:00,Assets:Bank:Savings,3000.0,0
+14,2025/01/04 15:00:00,Assets:Bank:Nubank,0,3000.0
+15,2025/01/05,Assets:Bank:Chase,800.0,0
+16,2025/01/05,Income:Freelance,0,800.0
+17,2025/01/06,Liabilities:Debts:Personal,500.0,0
+18,2025/01/06,Assets:Cash,0,500.0
+19,2025/01/07,Expenses:Dining,60.0,0
+20,2025/01/07,Assets:Cash,0,60.0
+21,2025/01/08,Expenses:Transportation,120.0,0
+22,2025/01/08,Assets:Cash,0,120.0
+23,2025/01/09,Assets:Cash,150.0,0
+24,2025/01/09,Income:Other,0,150.0
+25,2025/01/10,Assets:Bank:Nubank,1500.0,0
+26,2025/01/10,Assets:Cash,0,1500.0
+27,2025/01/11,Expenses:Utilities,750.0,0
+28,2025/01/11,Assets:Bank:Nubank,0,750.0
+29,2025/01/12,Expenses:Groceries,120.0,0
+30,2025/01/12,Liabilities:CreditCard:Visa,0,120.0
+31,2025/01/13,Assets:Bank:Chase,1000.0,0
+32,2025/01/13,Income:Bonus,0,1000.0
+33,2025/01/14,Assets:Bank:Savings,400.0,0
+34,2025/01/14,Assets:Bank:Chase,0,400.0
+35,2025/01/15,Expenses:Entertainment,600.0,0
+36,2025/01/15,Assets:Cash,0,600.0
+37,2025/01/16,Expenses:Tipping,10.0,0
+38,2025/01/16,Assets:Cash,0,10.0
+39,2025/01/17,Assets:Bank:Nubank,4000.0,0
+40,2025/01/17,Income:Rent,0,4000.0
+41,2025/01/18,Assets:Bank:Chase,0,200.0
+42,2025/01/18,Assets:Bank:Nubank,3400.0,0
+43,2025/01/18,Assets:Bank:Chase,0,200.0
+44,2025/01/18,Assets:Bank:Nubank,3400.0,0
+45,2025/01/18,Assets:Bank:Chase,0,200.0
+46,2025/01/18,Assets:Bank:Nubank,3400.0,0
+47,2025/01/18,Assets:Bank:Chase,0,200.0
+48,2025/01/18,Assets:Bank:Nubank,3400.0,0
+,,SUMAS IGUALES,34255.0,19155.0
