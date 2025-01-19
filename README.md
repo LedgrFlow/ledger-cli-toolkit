@@ -13,6 +13,9 @@
 
 `ledgerpy` is a Python library designed to read, manipulate, and generate accounting files in `.ledger` format. It offers a simple way to work with these files within the Python ecosystem, transforming them into JSON-like structures that are easy to process and analyze.
 
+![Preview](./doc/preview/768_1x_shots_so.png)
+![Preview](./doc/preview/413_1x_shots_so.png)
+
 ## Why `ledgerpy`?
 
 The project was born from the need to have a tool to manipulate and read `.ledger` files directly from Python. While there are powerful tools such as `ledger-cli` to interact with these types of files from the command line, `ledgerpy` seeks to offer the same capability, but within the language, allowing developers to integrate this data into their applications in a simple way.
