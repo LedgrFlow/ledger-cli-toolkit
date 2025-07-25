@@ -40,11 +40,16 @@ class LedgerParser:
 
         for line in lines:
             line = line.strip()
+
             if not line:
                 # Save the current transaction and reset
                 if current_transaction:
                     transactions.append(current_transaction)
                     current_transaction = None
+                continue
+            
+            if not line or line.startswith(";"):
+                # Línea vacía o comentario tipo ledger o markdown
                 continue
 
             date_match = re.match(
@@ -94,18 +99,24 @@ class LedgerParser:
                         if len(account_match.groups()) > 1
                         else last_unit
                     )
-                    amount = (
-                        account_match.group(3)
-                        if len(account_match.groups()) > 2
-                        else f"-{last_amount}"
-                    )
+                    # amount = (
+                    #     account_match.group(3)
+                    #     if len(account_match.groups()) > 2
+                    #     else f"-{last_amount}"
+                    # )
+
+                    if len(account_match.groups()) > 2:
+                        amount = account_match.group(3)
+                    else:
+                        amount = -abs(last_amount)
 
                     # Clean data
                     amount = (
-                        float(amount.replace(",", "").replace("$", ""))
+                        float(str(amount).replace(",", "").replace("$", ""))
                         if amount
                         else 0.0
                     )
+
                     unit = unit.replace(" ", "") if unit else "N/A"
                     account_name = account_name.replace(" ", "")
                     subAccounts = account_name.split(":")
