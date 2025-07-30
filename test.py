@@ -1,6 +1,5 @@
 from ledger_cli import LedgerVisual
 from ledger_cli import LedgerParser
-from ledger_cli import LedgerExports
 from ledger_cli import LedgerGrafics
 from ledger_cli import LedgerAnalyst
 
@@ -21,7 +20,6 @@ if __name__ == "__main__":
     )
     visual = LedgerVisual()
     grafics = LedgerGrafics()
-    exports = LedgerExports("test")
 
     transactions_json = parser.parse()
     accounts_list = parser.parse_accounts()

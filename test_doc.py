@@ -3,7 +3,6 @@ from datetime import datetime
 from ledger_cli import (
     LedgerVisual,
     LedgerParser,
-    LedgerExports,
     LedgerGrafics,
     LedgerAnalyst,
 )
@@ -32,7 +31,7 @@ if __name__ == "__main__":
     # Nombre del archivo con fecha y hora
     now = datetime.now()
     timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")
-    filePath = "test/ledgers/test_3.ledger"
+    filePath = "test/ledgers/test_2.ledger"
     output_path = os.path.join(
         output_dir, f"output_{filePath.split("/")[2]}_{timestamp}.md"
     )
@@ -53,10 +52,12 @@ if __name__ == "__main__":
     )
     visual = LedgerVisual()
     grafics = LedgerGrafics()
-    exports = LedgerExports("test")
 
+    # Parse the transactions and accounts
     transactions_json = parser.parse()
     accounts_list = parser.parse_accounts()
+    accounts_advance = parser.parse_accounts_advance()
+    metadata = parser.parse_metadata()
 
     analyst = LedgerAnalyst(
         transactions=transactions_json,
@@ -78,6 +79,16 @@ if __name__ == "__main__":
     detected_alerts = analyst.detect_unusual_expenses(threshold=1.5)
     cashflow_by_month = analyst.get_cashflow_by_month()
     expenses_trends = analyst.get_expense_trends_by_category()
+    monthly_growth_rates = analyst.get_monthly_growth_rates()
+    monthly_expense_ratio = analyst.get_monthly_expense_ratio()
+    moving_average = analyst.get_moving_average("in")
+    trend_slope = analyst.get_trend_slope("in")
+    predicted_months = analyst.predict_future_months("in")
+    extreme_months = analyst.get_extreme_months()
+    classify_months = analyst.classify_months_by_balance()
+    compare_months = analyst.compare_months("2025-01", "2025-02")
+    income_dependency = analyst.get_income_dependency_ratio()
+    cumulative_net_income = analyst.get_cumulative_net_income()
 
     balances = parser.calculate_balances(
         transactions_json=transactions_json, reference=accounts_list
@@ -118,6 +129,12 @@ if __name__ == "__main__":
         )
         write_section(
             f,
+            "parse_accounts_advance()",
+            "Lista de cuentas contables con metadatos detectadas.",
+            parser.to_json(accounts_advance),
+        )
+        write_section(
+            f,
             "calculate_balances()",
             "Cálculo de balances por cuenta detallada.",
             parser.to_json(balances),
@@ -146,6 +163,13 @@ if __name__ == "__main__":
             "Periodo detectado en las transacciones.",
             f"Desde: `{period[0]}` hasta `{period[1]}`",
             code_block=False,
+        )
+
+        write_section(
+            f,
+            "parse_metadata()",
+            "Metadatos del archivo.",
+            parser.to_json(metadata),
         )
 
         # ---------- LedgerAnalyst ----------
@@ -193,28 +217,98 @@ if __name__ == "__main__":
             "Evolución del balance diario (ingresos - gastos).",
             parser.to_json(balance_by_day),
         )
-        
+
         write_section(
             f,
             "get_cashflow_by_month()",
             "Flujo de caja mensual (ingresos - gastos).",
             parser.to_json(cashflow_by_month),
         )
-        
+
         write_section(
             f,
             "get_expense_trends_by_category()",
             "Tendencias de gastos por categoría mensual.",
             parser.to_json(expenses_trends),
         )
-        
+
         write_section(
             f,
             "get_monthly_incomes_expenses()",
             "Resumen mensual de ingresos y gastos.",
             parser.to_json(analyst.get_monthly_incomes_expenses()),
         )
-        
+
+        write_section(
+            f,
+            "get_monthly_growth_rates()",
+            "Tasa de crecimiento mensual.",
+            parser.to_json(monthly_growth_rates),
+        )
+
+        write_section(
+            f,
+            "get_monthly_expense_ratio()",
+            "Tasa de gastos mensual.",
+            parser.to_json(monthly_expense_ratio),
+        )
+
+        write_section(
+            f,
+            "get_moving_average()",
+            "Promedio móvil.",
+            parser.to_json(moving_average),
+        )
+
+        write_section(
+            f,
+            "get_trend_slope()",
+            "Pendiente de la tendencia.",
+            parser.to_json(trend_slope),
+        )
+
+        write_section(
+            f,
+            "predict_future_months()",
+            "Predicción de meses futuros.",
+            parser.to_json(predicted_months),
+        )
+
+        write_section(
+            f,
+            "get_extreme_months()",
+            "Meses extremos.",
+            parser.to_json(extreme_months),
+        )
+
+        write_section(
+            f,
+            "classify_months_by_balance()",
+            "Clasificación de meses según balance.",
+            parser.to_json(classify_months),
+        )
+
+        write_section(
+            f,
+            "compare_months()",
+            "Comparación de meses.",
+            parser.to_json(compare_months),
+        )
+
+        write_section(
+            f,
+            "get_income_dependency_ratio()",
+            "Ratio de dependencia de ingresos.",
+            parser.to_json(income_dependency),
+        )
+
+        write_section(
+            f,
+            "get_cumulative_net_income()",
+            "Acumulación de ingresos netos.",
+            parser.to_json(cumulative_net_income),
+        )
+
         write_section(
             f,
             "get_accounts_used()",

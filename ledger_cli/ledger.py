@@ -47,7 +47,7 @@ class LedgerParser:
                     transactions.append(current_transaction)
                     current_transaction = None
                 continue
-            
+
             if not line or line.startswith(";"):
                 # Línea vacía o comentario tipo ledger o markdown
                 continue
@@ -68,10 +68,28 @@ class LedgerParser:
 
             elif current_transaction:
                 # Parse account line
+                # account_match = re.match(
+                #     r"^([A-Za-z0-9:]+)\s+([A-Z]{3})\s+(-?\d{1,3}(?:,\d{3})*(?:\.\d+)?)$",
+                #     line,
+                # )
+
+                unit = None
+                amount = None
+
+                # Primer patrón (moneda + cantidad o cantidad + moneda)
                 account_match = re.match(
-                    r"^([A-Za-z0-9:]+)\s+([A-Z]{3})\s+(-?\d{1,3}(?:,\d{3})*(?:\.\d+)?)$",
+                    r"""^([A-Za-z0-9: ]+)\s+
+                        (?:
+                            ([A-Z]{3})\s+     # Grupo 2: moneda primero
+                            (-?\d{1,3}(?:,\d{3})*(?:\.\d+)?)     # Grupo 3: cantidad
+                            |
+                            (-?\d{1,3}(?:,\d{3})*(?:\.\d+)?)\s+  # Grupo 4: cantidad primero
+                            ([A-Z]{3})       # Grupo 5: moneda
+                        )$""",
                     line,
+                    re.VERBOSE,
                 )
+
                 if not account_match:
                     account_match = re.match(
                         r"^([A-Za-z0-9: ]+)\s+([A-Z]{3})\s+(-?\d+(?:\.\d+)?)$", line
@@ -92,31 +110,50 @@ class LedgerParser:
                 if not account_match:
                     account_match = re.match(r"^([A-Za-z0-9: ]+)$", line)
 
-                if account_match:
-                    account_name = account_match.group(1).strip()
-                    unit = (
-                        account_match.group(2)
-                        if len(account_match.groups()) > 1
-                        else last_unit
+                group_count = account_match.lastindex or 0
+                account_name = account_match.group(1).strip()
+
+                if (
+                    group_count >= 3
+                    and account_match.group(2)
+                    and account_match.group(3)
+                ):  # moneda primero
+                    unit = account_match.group(2)
+                    amount = account_match.group(3)
+                elif (
+                    group_count >= 5
+                    and account_match.group(4)
+                    and account_match.group(5)
+                ):  # cantidad primero
+                    amount = account_match.group(4)
+                    unit = account_match.group(5)
+
+                else:
+                    # Intenta con otros patrones más simples
+                    simple_match = re.match(
+                        r"^([A-Za-z0-9: ]+)\s+([A-Z]{3}|\$)?\s*(-?\$?\d{1,3}(?:,\d{3})*(?:\.\d+)?)$",
+                        line,
                     )
-                    # amount = (
-                    #     account_match.group(3)
-                    #     if len(account_match.groups()) > 2
-                    #     else f"-{last_amount}"
-                    # )
-
-                    if len(account_match.groups()) > 2:
-                        amount = account_match.group(3)
+                    if simple_match:
+                        account_name = simple_match.group(1).strip()
+                        unit = simple_match.group(2)
+                        amount = simple_match.group(3)
                     else:
-                        amount = -abs(last_amount)
+                        # Solo nombre de cuenta
+                        simple_name = re.match(r"^([A-Za-z0-9: ]+)$", line)
+                        if simple_name:
+                            account_name = simple_name.group(1).strip()
+                            amount = (
+                                -abs(last_amount) if last_amount is not None else 0.0
+                            )
+                            unit = last_unit
 
-                    # Clean data
+                if account_name:
                     amount = (
                         float(str(amount).replace(",", "").replace("$", ""))
-                        if amount
+                        if amount is not None
                         else 0.0
                     )
-
                     unit = unit.replace(" ", "") if unit else "N/A"
                     account_name = account_name.replace(" ", "")
                     subAccounts = account_name.split(":")
@@ -132,6 +169,47 @@ class LedgerParser:
                             "amount": amount,
                         }
                     )
+
+                # if account_match:
+                #     account_name = account_match.group(1).strip()
+                #     unit = (
+                #         account_match.group(2)
+                #         if len(account_match.groups()) > 1
+                #         else last_unit
+                #     )
+                #     # amount = (
+                #     #     account_match.group(3)
+                #     #     if len(account_match.groups()) > 2
+                #     #     else f"-{last_amount}"
+                #     # )
+
+                #     if len(account_match.groups()) > 2:
+                #         amount = account_match.group(3)
+                #     else:
+                #         amount = -abs(last_amount)
+
+                #     # Clean data
+                #     amount = (
+                #         float(str(amount).replace(",", "").replace("$", ""))
+                #         if amount
+                #         else 0.0
+                #     )
+
+                #     unit = unit.replace(" ", "") if unit else "N/A"
+                #     account_name = account_name.replace(" ", "")
+                #     subAccounts = account_name.split(":")
+
+                #     last_amount = amount
+                #     last_unit = unit
+
+                #     current_transaction["accounts"].append(
+                #         {
+                #             "account": account_name,
+                #             "subAccounts": subAccounts,
+                #             "unit": unit,
+                #             "amount": amount,
+                #         }
+                #     )
 
         # Add the last transaction if any
         if current_transaction:
@@ -157,6 +235,118 @@ class LedgerParser:
                 accounts.append(account_name)
 
         return accounts
+
+    def parse_accounts_advance(self) -> List[Dict[str, str]]:
+        """
+        Parses the file to extract a list of accounting accounts with additional metadata.
+
+        Example input:
+        account Activos:Banco
+          description "Cuenta bancaria principal para operaciones diarias"
+          category "Activo Corriente"
+          type "Activo"
+          currency "MXN"
+          created "2023-01-15"
+          notes "Cuenta para depósitos y pagos automáticos"
+
+        Returns a list of dicts like:
+        [
+            {
+                "account": "Activos:Banco",
+                "description": "Cuenta bancaria principal para operaciones diarias",
+                "category": "Activo Corriente",
+                "type": "Activo",
+                "currency": "MXN",
+                "created": "2023-01-15",
+                "notes": "Cuenta para depósitos y pagos automáticos"
+            },
+            ...
+        ]
+        """
+        accounts = []
+        current_account = None
+        current_data = {}
+
+        with open(self.file_accounts_path, "r", encoding="utf-8") as file:
+            for line in file:
+                line = line.strip()
+                # Detecta inicio de nueva cuenta
+                account_match = re.match(r"^account\s+([A-Za-z0-9:]+)$", line)
+                if account_match:
+                    # Si ya había una cuenta anterior, la guarda
+                    if current_account is not None:
+                        accounts.append(current_data)
+
+                    # Nueva cuenta
+                    current_account = account_match.group(1).replace(" ", "")
+                    current_data = {"account": current_account}
+                    continue
+
+                # Si está dentro de una cuenta, parsea pares clave-valor
+                if current_account is not None and line:
+                    # Busca patrón clave "valor entre comillas"
+                    key_value_match = re.match(r'^([a-zA-Z0-9_]+)\s+"(.+)"$', line)
+                    if key_value_match:
+                        key = key_value_match.group(1).lower()
+                        value = key_value_match.group(2)
+                        current_data[key] = value
+                    else:
+                        # También puede haber líneas sin comillas, opcional
+                        key_value_match = re.match(r"^([a-zA-Z0-9_]+)\s+(.+)$", line)
+                        if key_value_match:
+                            key = key_value_match.group(1).lower()
+                            value = key_value_match.group(2)
+                            current_data[key] = value
+
+        # Añade la última cuenta si existe
+        if current_account is not None:
+            accounts.append(current_data)
+
+        return accounts
+
+    def parse_metadata(self) -> Dict[str, Union[str, List[str], Dict[str, str]]]:
+        metadata = {}
+        current_key = None
+        current_subkey = None
+        buffer = []
+
+        with open(self.file_path, "r", encoding="utf-8") as file:
+            for line in file:
+                line = line.strip()
+                if line.startswith(";;; [") and line.endswith("]"):
+                    # Guarda lo anterior si hay algo
+                    if current_key and buffer:
+                        content = "\n".join(buffer).strip()
+                        if current_subkey:
+                            if current_key not in metadata:
+                                metadata[current_key] = {}
+                            metadata[current_key][current_subkey] = content
+                        else:
+                            metadata[current_key] = content
+                        buffer = []
+
+                    # Inicia nuevo bloque
+                    tag = line[5:-1]
+                    if ":" in tag:
+                        current_key, current_subkey = tag.split(":", 1)
+                    else:
+                        current_key = tag
+                        current_subkey = None
+
+                elif line.startswith(";;;"):
+                    buffer.append(line[4:])  # Quitamos el prefijo ";;; "
+
+            # Guardar el último bloque si existe
+            if current_key and buffer:
+                content = "\n".join(buffer).strip()
+                if current_subkey:
+                    if current_key not in metadata:
+                        metadata[current_key] = {}
+                    metadata[current_key][current_subkey] = content
+                else:
+                    metadata[current_key] = content
+
+        return metadata
 
     def details_account(self, account: str):
         sub_accounts = account.split(":")

@@ -1,10 +1,26 @@
 ; -*- Ledger -*-
 ; Demo de archivo Ledger en dólares
 
-; Configuración de moneda
-; commodity $
-;  format $1,000.00
-;  note USD
+; ===============================
+;           Metadatos
+; ===============================
+
+; Configuracion de moneda
+;;; [currency]
+;;; values = MXN, USD, EUR
+
+; Atajos (Snippets) para autocompletar en el editor
+;;; [snippet:gasolina]
+;;; value = $DATE * Gasolina
+;;;     Expenses:Transport  $monto
+;;;     Assets:Cash
+
+;;; [snippet:sueldo]
+;;; value = $DATE * Sueldo
+;;;   Assets:Bank:Checking  $monto
+;;;   Income:Salary
+
+
 
 ; ==============================
 ;         Plan de cuentas
@@ -12,36 +28,133 @@
 
 ; Activos
 account Assets:Bank:Checking
+  description "Cuenta bancaria principal para operaciones diarias"
+  category "Activo Corriente"
+  created "2023-01-15"
+
 account Assets:Bank:Savings
+  description "Cuenta bancaria para ahorros"
+  category "Activo Corriente"
+  created "2023-01-15"
+
 account Assets:Cash
+  description "Cuenta bancaria para depósitos y pagos automáticos"
+  category "Activo Corriente"
+  created "2023-01-15"
+
 account Assets:Investments:Stocks
+  description "Cuenta bancaria para inversiones"
+  category "Activo Corriente"
+  created "2023-01-15"
+
 account Assets:AccountsReceivable
+  description "Cuenta bancaria para ingresos y gastos de la empresa"
+  category "Activo Corriente"
+  created "2023-01-15"
 
 ; Pasivos
 account Liabilities:CreditCard:Visa
+  description "Cuenta bancaria para pagos de crédito"
+  category "Pasivo Corriente"
+  created "2023-01-15"
+
 account Liabilities:Loan:CarLoan
+  description "Cuenta bancaria para préstamos de automóvil"
+  category "Pasivo Corriente"
+  created "2023-01-15"
 
 ; Capital
 account Equity:OpeningBalances
+  description "Saldo inicial de la empresa"
+  category "Capital Corriente"
+  created "2023-01-15"
+
 account Equity:Owner
+  description "Capital de la empresa"
+  category "Capital Corriente"
+  created "2023-01-15"
 
 ; Ingresos
 account Income:Salary
+  description "Ingresos salariales"
+  category "Ingreso Corriente"
+  created "2023-01-15"
+
 account Income:Investments:Dividends
+  description "Ingresos de dividendos"
+  category "Ingreso Corriente"
+  created "2023-01-15"
+
 account Income:Freelance
+  description "Ingresos de trabajo por hora"
+  category "Ingreso Corriente"
+  created "2023-01-15"
 
 ; Egresos
 account Expenses:Rent
+  description "Egresos de alquiler"
+  category "Egreso Corriente"
+  created "2023-01-15"
+
 account Expenses:Utilities
+  description "Egresos de utilidades"
+  category "Egreso Corriente"
+  created "2023-01-15"
+
 account Expenses:Food:Groceries
+  description "Egresos de comida"
+  category "Egreso Corriente"
+  created "2023-01-15"
+
 account Expenses:Food:DiningOut
+  description "Egresos de comida rápida"
+  category "Egreso Corriente"
+  created "2023-01-15"
+
 account Expenses:Transportation:Gas
+  description "Egresos de gasolina"
+  category "Egreso Corriente"
+  created "2023-01-15"
+
 account Expenses:Transportation:Maintenance
+  description "Egresos de mantenimiento de vehículos"
+  category "Egreso Corriente"
+  created "2023-01-15"
+
 account Expenses:Entertainment
+  description "Egresos de entretenimiento"
+  category "Egreso Corriente"
+  created "2023-01-15"
+
 account Expenses:Travel
+  description "Egresos de viaje"
+  category "Egreso Corriente"
+  created "2023-01-15"
+
 account Expenses:Insurance:Car
+  description "Egresos de seguros de automóvil"
+  category "Egreso Corriente"
+  created "2023-01-15"
+
 account Expenses:Insurance:Health
+  description "Egresos de seguros de salud"
+  category "Egreso Corriente"
+  created "2023-01-15"
+
 account Expenses:Education
+  description "Egresos de educación"
+  category "Egreso Corriente"
+  created "2023-01-15"
+
+account Expenses:Medical
+  description "Egresos médicos"
+  category "Egreso Corriente"
+  created "2023-01-15"
+
+account Expenses:Shopping
+  description "Egresos de compras"
+  category "Egreso Corriente"
+  created "2023-01-15"
 
 ; ==============================
 ;         Transacciones
@@ -54,7 +167,7 @@ account Expenses:Education
   Assets:Investments:Stocks         $15,000.00
   Liabilities:CreditCard:Visa       $-2,500.00
   Liabilities:Loan:CarLoan         $-10,000.00
-  Equity:OpeningBalances
+  Equity:OpeningBalances           $-38,500.00
 
 2025-01-15 * Paycheck
   Assets:Bank:Checking              $7,500.00
@@ -126,4 +239,88 @@ account Expenses:Education
 
 2025-03-25 * Entertainment - Concert
   Expenses:Entertainment            $200.00
+  Assets:Bank:Checking
+
+; ==============================
+; Abril 2025
+; ==============================
+
+2025-04-01 * Paycheck
+  Assets:Bank:Checking              $7,500.00
+  Income:Salary
+
+2025-04-02 * Dentist Appointment
+  Expenses:Medical                  $1,200.00
+  Assets:Bank:Checking
+
+2025-04-10 * Gasoline
+  Expenses:Transportation:Gas       $130.00
+  Assets:Bank:Checking
+
+2025-04-15 * Monthly Rent
+  Expenses:Rent                   $1,500.00
+  Assets:Bank:Checking
+
+2025-04-20 * Shopping - Electronics
+  Expenses:Shopping                 $3,000.00
+  Assets:Bank:Checking
+
+2025-04-25 * Dinner Out
+  Expenses:Food:DiningOut           $100.00
+  Assets:Bank:Checking
+
+; ==============================
+; Mayo 2025
+; ==============================
+
+2025-05-01 * Paycheck
+  Assets:Bank:Checking              $7,500.00
+  Income:Salary
+
+2025-05-03 * Utilities
+  Expenses:Utilities                $310.00
+  Assets:Bank:Checking
+
+2025-05-06 * Travel - Family Emergency
+  Expenses:Travel                 $5,800.00
+  Assets:Bank:Checking
+
+2025-05-10 * Grocery Shopping
+  Expenses:Food:Groceries           $270.00
+  Assets:Bank:Checking
+
+2025-05-15 * Monthly Rent
+  Expenses:Rent                   $1,500.00
+  Assets:Bank:Checking
+
+2025-05-25 * Car Repair (transmission)
+  Expenses:Transportation:Maintenance $2,200.00
+  Assets:Bank:Checking
+
+; ==============================
+; Junio 2025
+; ==============================
+
+2025-06-01 * Paycheck
+  Assets:Bank:Checking              $7,500.00
+  Income:Salary
+
+2025-06-03 * Health Insurance
+  Expenses:Insurance:Health         $450.00
+  Assets:Bank:Checking
+
+2025-06-10 * Freelance Payment
+  Assets:Bank:Checking              $4,500.00
+  Income:Freelance
+
+2025-06-15 * Monthly Rent
+  Expenses:Rent                   $1,500.00
+  Assets:Bank:Checking
+
+2025-06-20 * Luxury Watch Purchase
+  Expenses:Shopping                 $6,500.00
+  Assets:Bank:Checking
+
+2025-06-30 * Entertainment - Festival
+  Expenses:Entertainment            $350.00
   Assets:Bank:Checking

@@ -3,7 +3,7 @@
 ; Moneda: MXN
 
 ; Definición de cuentas
-account Activos:Banco
+account Activos:Banco  
 account Ingresos:Salarios
 account Gastos:Comida
 account Gastos:Transporte
@@ -13,7 +13,7 @@ account Pasivos:Tarjeta
 ; Transacciones de ejemplo
 
 2025/01/01 Salario Mensual
-    Activos:Banco                      MXN 25,000.00
+    Activos:Banco                      25,000.00 MXN
     Ingresos:Salarios                
 
 2025-01-02 Compra de alimentos
