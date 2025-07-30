@@ -68,6 +68,23 @@ if __name__ == "__main__":
         liability_parents=("Pasivos", "Liabilities"),
     )
 
+    balances = parser.calculate_balances(
+        transactions_json=transactions_json, reference=accounts_list
+    )
+    balances_by_parents = parser.calculate_balances_by_parents_accounts(
+        transactions_json=transactions_json
+    )
+    state_results = parser.calculate_status_results(balances)
+    balances_by_details = parser.calculate_balances_by_details_accounts(
+        transactions_json=transactions_json
+    )
+    period = parser.get_date_range(transactions_json=transactions_json)
+
+    # Graficos y exportación
+    grafics.create_balance_chart(balances, f"({period[0]} - {period[1]})")
+    grafics.create_balance_pie_chart(balances, f"({period[0]} - {period[1]})")
+    grafics.show_chart()
+
     # Cálculos analyst
     daily = analyst.get_daily_incomes_expenses()
     pie_expenses = analyst.get_expenses_pie()
@@ -89,18 +106,6 @@ if __name__ == "__main__":
     compare_months = analyst.compare_months("2025-01", "2025-02")
     income_dependency = analyst.get_income_dependency_ratio()
     cumulative_net_income = analyst.get_cumulative_net_income()
-
-    balances = parser.calculate_balances(
-        transactions_json=transactions_json, reference=accounts_list
-    )
-    balances_by_parents = parser.calculate_balances_by_parents_accounts(
-        transactions_json=transactions_json
-    )
-    state_results = parser.calculate_status_results(balances)
-    balances_by_details = parser.calculate_balances_by_details_accounts(
-        transactions_json=transactions_json
-    )
-    period = parser.get_date_range(transactions_json=transactions_json)
 
     # Escritura del archivo Markdown
     with open(output_path, "w", encoding="utf-8") as f:
