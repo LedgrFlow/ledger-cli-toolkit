@@ -35,10 +35,7 @@ pyparsing==3.2.1
 pyphen==0.17.2
 pyproject_hooks==1.2.0
 python-dateutil==2.9.0.post0
-<<<<<<< HEAD
-=======
 PyYAML==6.0.2
->>>>>>> 5439302 (Primer commit)
 readme_renderer==44.0
 reportlab==4.2.5
 requests==2.32.4

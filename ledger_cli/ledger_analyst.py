@@ -8,11 +8,6 @@ from dateutil.relativedelta import relativedelta
 
 
 # Utilidades auxiliares para los nuevos métodos (fuera de la clase para reutilizar fácilmente)
-
-<<<<<<< HEAD
-=======
-
->>>>>>> 5439302 (Primer commit)
 def linear_regression_trend(values: List[float]) -> Tuple[float, float]:
     """
     Calcula una regresión lineal simple y = mx + b para una serie de valores.
@@ -74,9 +69,7 @@ class LedgerAnalyst:
         self.expense_parents = expense_parents
         self.asset_parents = asset_parents
         self.liability_parents = liability_parents
-<<<<<<< HEAD
-=======
-        
+    
         
     def resume(self):
         """Resumen de los datos analizados"""
@@ -125,7 +118,6 @@ class LedgerAnalyst:
                 "investment_roi": self.get_investment_roi(),
             }
         }
->>>>>>> 5439302 (Primer commit)
 
     def _is_under_parent(self, account: str, parents: tuple) -> bool:
         return any(
@@ -542,8 +534,6 @@ class LedgerAnalyst:
                 {"month": entry["month"], "cumulative_net": round(cumulative, 2)}
             )
         return result
-<<<<<<< HEAD
-=======
 
     # ----------------------------------------------------------------------------------------------
     #                              Otros analisis
@@ -908,4 +898,3 @@ class LedgerAnalyst:
                 }
 
         return roi
->>>>>>> 5439302 (Primer commit)

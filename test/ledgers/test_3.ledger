@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 ---
 currency:
   - MXN
@@ -22,34 +20,23 @@ snippets:
         Income:Salary
 ---
 
-
->>>>>>> 5439302 (Primer commit)
 ; Archivo de ejemplo para Ledger
 ; Fecha: 2025-01-18
 ; Moneda: MXN
 
-<<<<<<< HEAD
-; Definición de cuentas
-account Activos:Banco  
-=======
 
 ; Definición de cuentas
 account Activos:Banco  
 account Pasivos:Tarjeta
->>>>>>> 5439302 (Primer commit)
 account Ingresos:Salarios
 account Gastos:Comida
 account Gastos:Transporte
 account Gastos:Entretenimiento
-<<<<<<< HEAD
 account Pasivos:Tarjeta
-=======
->>>>>>> 5439302 (Primer commit)
 
 ; Transacciones de ejemplo
 
 2025/01/01 Salario Mensual
-<<<<<<< HEAD
     Activos:Banco                      25,000.00 MXN
     Ingresos:Salarios                
 
@@ -71,7 +58,6 @@ account Pasivos:Tarjeta
 
 2025-01-08 Suscripción de streaming
     Gastos:Entretenimiento             MXN 250.00
-=======
     Activos:Banco                      25,000.00 MXN +{IVA, RET_ISR}
     Ingresos:Salarios
     -tags: salary, income
@@ -101,7 +87,6 @@ account Pasivos:Tarjeta
 
 2025-01-08 Suscripción de streaming
     Gastos:Entretenimiento             MXN 250.00 ={IVA}
->>>>>>> 5439302 (Primer commit)
     Activos:Banco
 
 2025-01-10 Transporte (taxi)

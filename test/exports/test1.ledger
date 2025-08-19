@@ -1,0 +1,377 @@
+; Accounts
+; description: "Cuenta bancaria principal para operaciones diarias"
+; category: "Activo Corriente"
+account Assets:Bank:Checking
+; description: "Cuenta bancaria para ahorros"
+; category: "Activo Corriente"
+account Assets:Bank:Savings
+; description: "Egresos de comida"
+; category: "Egreso Corriente"
+account Expenses:Food:Groceries
+; description: "Egresos de comida rápida"
+; category: "Egreso Corriente"
+account Expenses:Food:DiningOut
+; description: Cuenta bancaria principal para operaciones diarias
+; category: Activo Corriente
+; created: 2023-01-15
+account Assets:Bank:Checking
+; description: Cuenta bancaria para ahorros
+; category: Activo Corriente
+; created: 2023-01-15
+account Assets:Bank:Savings
+; description: Cuenta bancaria para depósitos y pagos automáticos
+; category: Activo Corriente
+; created: 2023-01-15
+account Assets:Cash
+; description: Cuenta bancaria para inversiones
+; category: Activo Corriente
+; created: 2023-01-15
+account Assets:Investments:Stocks
+; description: Cuenta bancaria para ingresos y gastos de la empresa
+; category: Activo Corriente
+; created: 2023-01-15
+account Assets:AccountsReceivable
+; description: Cuenta bancaria para pagos de crédito
+; category: Pasivo Corriente
+; created: 2023-01-15
+account Liabilities:CreditCard:Visa
+; description: Cuenta bancaria para préstamos de automóvil
+; category: Pasivo Corriente
+; created: 2023-01-15
+account Liabilities:Loan:CarLoan
+; description: Saldo inicial de la empresa
+; category: Capital Corriente
+; created: 2023-01-15
+account Equity:OpeningBalances
+; description: Capital de la empresa
+; category: Capital Corriente
+; created: 2023-01-15
+account Equity:Owner
+; description: Ingresos salariales
+; category: Ingreso Corriente
+; created: 2023-01-15
+account Income:Salary
+; description: Ingresos de dividendos
+; category: Ingreso Corriente
+; created: 2023-01-15
+account Income:Investments:Dividends
+; description: Ingresos de trabajo por hora
+; category: Ingreso Corriente
+; created: 2023-01-15
+account Income:Freelance
+; description: Egresos de alquiler
+; category: Egreso Corriente
+; created: 2023-01-15
+account Expenses:Rent
+; description: Egresos de utilidades
+; category: Egreso Corriente
+; created: 2023-01-15
+account Expenses:Utilities
+; description: Egresos de comida
+; category: Egreso Corriente
+; created: 2023-01-15
+account Expenses:Food:Groceries
+; description: Egresos de comida rápida
+; category: Egreso Corriente
+; created: 2023-01-15
+account Expenses:Food:DiningOut
+; description: Egresos de gasolina
+; category: Egreso Corriente
+; created: 2023-01-15
+account Expenses:Transportation:Gas
+; description: Egresos de mantenimiento de vehículos
+; category: Egreso Corriente
+; created: 2023-01-15
+account Expenses:Transportation:Maintenance
+; description: Egresos de entretenimiento
+; category: Egreso Corriente
+; created: 2023-01-15
+account Expenses:Entertainment
+; description: Egresos de viaje
+; category: Egreso Corriente
+; created: 2023-01-15
+account Expenses:Travel
+; description: Egresos de seguros de automóvil
+; category: Egreso Corriente
+; created: 2023-01-15
+account Expenses:Insurance:Car
+; description: Egresos de seguros de salud
+; category: Egreso Corriente
+; created: 2023-01-15
+account Expenses:Insurance:Health
+; description: Egresos de educación
+; category: Egreso Corriente
+; created: 2023-01-15
+account Expenses:Education
+; description: Egresos médicos
+; category: Egreso Corriente
+; created: 2023-01-15
+account Expenses:Medical
+; description: Egresos de compras
+; category: Egreso Corriente
+; created: 2023-01-15
+account Expenses:Shopping
+account Activos:Banco
+account Pasivos:Tarjeta
+account Ingresos:Salarios
+account Gastos:Comida
+account Gastos:Transporte
+account Gastos:Entretenimiento
+
+; Transactions
+2025-01-01 * Opening Balances
+    Assets:Bank:Checking                     $10,000.00
+    Assets:Bank:Savings                      $25,000.00
+    Assets:Cash                              $1,000.00
+    Assets:Investments:Stocks                $15,000.00
+    Liabilities:CreditCard:Visa              $-2,500.00
+    Liabilities:Loan:CarLoan                 $-10,000.00
+    Equity:OpeningBalances                   $-38,500.00
+
+2025/01/01  Salario Mensual
+    Activos:Banco                            MXN 25,000.00
+    Ingresos:Salarios                        MXN -25,000.00
+
+2025-01-02  Compra de alimentos
+    Gastos:Comida                            MXN 1,200.00
+    Activos:Banco                            MXN -1,200.00
+
+; {'key': 'tags', 'value': 'shopping, groceries, food'}
+; {'key': 'uuid', 'value': 'f2c2a-3bd1'}
+; {'key': 'ticket', 'value': '[ticket](./tickets/compu-2025.jpg)'}
+; {'key': 'responsible', 'value': 'Eduardo'}
+2025-01-02  Compra de alimentos
+    Gastos:Comida                            MXN 86.21
+    Activos:Banco                            MXN -100.00
+    Assets:Taxes:IVA                         MXN 13.79
+
+2025-01-03  Transporte público
+    Gastos:Transporte                        MXN 500.00
+    Activos:Banco                            MXN -500.00
+
+2025-01-03  Transporte público
+    Gastos:Transporte                        MXN 500.00
+    Activos:Banco                            MXN -500.00
+
+2025-01-05  Cena en restaurante
+    Gastos:Comida                            MXN 750.00
+    Activos:Banco                            MXN -750.00
+
+2025-01-05  Cena en restaurante
+    Gastos:Comida                            MXN 750.00
+    Activos:Banco                            MXN -870.00
+    Assets:Taxes:IVA                         MXN 120.00
+
+2025-01-07  Pago de tarjeta de crédito
+    Pasivos:Tarjeta                          MXN 5,000.00
+    Activos:Banco                            MXN -5,000.00
+
+2025-01-07  Pago de tarjeta de crédito
+    Pasivos:Tarjeta                          MXN 5,000.00
+    Activos:Banco                            MXN -5,000.00
+
+; {'key': 'tags', 'value': 'salary, income'}
+; {'key': 'uuid', 'value': 'f2c2a-3bd1'}
+; {'key': 'responsible', 'value': 'Eduardo'}
+2025-01-08  Suscripción de streaming
+    Gastos:Entretenimiento                   MXN 250.00
+    Activos:Banco                            MXN 25,000.00
+    Ingresos:Salarios                        MXN -29,000.00
+    Assets:Taxes:IVA                         MXN 4,000.00
+
+2025-01-08  Suscripción de streaming
+    Gastos:Entretenimiento                   MXN 215.52
+    Activos:Banco                            MXN -250.00
+    Assets:Taxes:IVA                         MXN 34.48
+
+2025-01-10  Transporte (taxi)
+    Gastos:Transporte                        MXN 300.00
+    Activos:Banco                            MXN -300.00
+
+2025-01-12  Supermercado
+    Gastos:Comida                            MXN 2,100.00
+    Activos:Banco                            MXN -2,100.00
+
+2025-01-15 * Paycheck
+    Assets:Bank:Checking                     $7,500.00
+    Income:Salary                            $-7,500.00
+
+2025-01-15  Salario extra
+    Activos:Banco                            MXN 10,000.00
+    Ingresos:Salarios                        MXN -10,000.00
+
+2025-01-16  Pago parcial tarjeta de crédito
+    Pasivos:Tarjeta                          MXN 3,000.00
+    Activos:Banco                            MXN -3,000.00
+
+2025-01-17  Cine
+    Gastos:Entretenimiento                   MXN 400.00
+    Activos:Banco                            MXN -400.00
+
+2025-01-17  Gasolina
+    Gastos:Transporte                        MXN 1,000.00
+    Activos:Banco                            MXN -1,000.00
+
+2025-01-18  Pago de luz
+    Gastos:Comida                            MXN 600.00
+    Activos:Banco                            MXN -600.00
+
+2025-01-18  Comida rápida
+    Gastos:Comida                            MXN 800.00
+    Activos:Banco                            MXN -800.00
+
+2025-01-18  Transporte privado
+    Gastos:Transporte                        MXN 450.00
+    Activos:Banco                            MXN -450.00
+
+; {'key': 'tags', 'value': 'shopping, groceries, food'}
+; {'key': 'uuid', 'value': 'f2c2a-3bd1'}
+2025-01-20 * Grocery Shopping
+    Expenses:Food:Groceries                  $100.00
+    Assets:Bank:Checking                     $-116.00
+    Assets:Taxes:IVA                         $16.00
+
+2025-01-20 * Grocery Shopping
+    Expenses:Food:Groceries                  MXN 100.00
+    Assets:Bank:Checking                     MXN -116.00
+    Assets:Taxes:IVA                         MXN 16.00
+
+2025-01-20 * Grocery Shopping
+    Expenses:Food:Groceries                  $250.00
+    Assets:Bank:Checking                     $-250.00
+
+2025-01-22 * Rent Payment
+    Expenses:Rent                            $1,500.00
+    Assets:Bank:Checking                     $-1,500.00
+
+2025-01-23 * Dinner Out
+    Expenses:Food:DiningOut                  $75.00
+    Assets:Bank:Checking                     $-75.00
+
+2025-01-25 * Credit Card Payment
+    Liabilities:CreditCard:Visa              $1,200.00
+    Assets:Bank:Checking                     $-1,200.00
+
+2025-02-01 * Paycheck
+    Assets:Bank:Checking                     $7,500.00
+    Income:Salary                            $-7,500.00
+
+2025-02-03 * Utilities Bill
+    Expenses:Utilities                       $300.00
+    Assets:Bank:Checking                     $-300.00
+
+2025-02-10 * Gasoline
+    Expenses:Transportation:Gas              $120.00
+    Assets:Bank:Checking                     $-120.00
+
+2025-02-15 * Freelance Project
+    Assets:Bank:Checking                     $3,200.00
+    Income:Freelance                         $-3,200.00
+
+2025-02-20 * Car Loan Payment
+    Liabilities:Loan:CarLoan                 $500.00
+    Assets:Bank:Checking                     $-500.00
+
+2025-02-22 * Stock Dividend
+    Assets:Bank:Savings                      $1,000.00
+    Income:Investments:Dividends             $-1,000.00
+
+2025-02-28 * Vacation Trip
+    Expenses:Travel                          $2,800.00
+    Assets:Bank:Checking                     $-2,800.00
+
+2025-03-01 * Paycheck
+    Assets:Bank:Checking                     $7,500.00
+    Income:Salary                            $-7,500.00
+
+2025-03-02 * Health Insurance
+    Expenses:Insurance:Health                $450.00
+    Assets:Bank:Checking                     $-450.00
+
+2025-03-10 * Maintenance: Oil Change
+    Expenses:Transportation:Maintenance      $90.00
+    Assets:Bank:Checking                     $-90.00
+
+2025-03-15 * Monthly Rent
+    Expenses:Rent                            $1,500.00
+    Assets:Bank:Checking                     $-1,500.00
+
+2025-03-18 * Course Subscription
+    Expenses:Education                       $300.00
+    Assets:Bank:Checking                     $-300.00
+
+2025-03-25 * Entertainment - Concert
+    Expenses:Entertainment                   $200.00
+    Assets:Bank:Checking                     $-200.00
+
+2025-04-01 * Paycheck
+    Assets:Bank:Checking                     $7,500.00
+    Income:Salary                            $-7,500.00
+
+2025-04-02 * Dentist Appointment
+    Expenses:Medical                         $1,200.00
+    Assets:Bank:Checking                     $-1,200.00
+
+2025-04-10 * Gasoline
+    Expenses:Transportation:Gas              $130.00
+    Assets:Bank:Checking                     $-130.00
+
+2025-04-15 * Monthly Rent
+    Expenses:Rent                            $1,500.00
+    Assets:Bank:Checking                     $-1,500.00
+
+2025-04-20 * Shopping - Electronics
+    Expenses:Shopping                        $3,000.00
+    Assets:Bank:Checking                     $-3,000.00
+
+2025-04-25 * Dinner Out
+    Expenses:Food:DiningOut                  $100.00
+    Assets:Bank:Checking                     $-100.00
+
+2025-05-01 * Paycheck
+    Assets:Bank:Checking                     $7,500.00
+    Income:Salary                            $-7,500.00
+
+2025-05-03 * Utilities
+    Expenses:Utilities                       $310.00
+    Assets:Bank:Checking                     $-310.00
+
+2025-05-06 * Travel - Family Emergency
+    Expenses:Travel                          $5,800.00
+    Assets:Bank:Checking                     $-5,800.00
+
+2025-05-10 * Grocery Shopping
+    Expenses:Food:Groceries                  $270.00
+    Assets:Bank:Checking                     $-270.00
+
+2025-05-15 * Monthly Rent
+    Expenses:Rent                            $1,500.00
+    Assets:Bank:Checking                     $-1,500.00
+
+2025-05-25 * Car Repair (transmission)
+    Expenses:Transportation:Maintenance      $2,200.00
+    Assets:Bank:Checking                     $-2,200.00
+
+2025-06-01 * Paycheck
+    Assets:Bank:Checking                     $7,500.00
+    Income:Salary                            $-7,500.00
+
+2025-06-03 * Health Insurance
+    Expenses:Insurance:Health                $450.00
+    Assets:Bank:Checking                     $-450.00
+
+2025-06-10 * Freelance Payment
+    Assets:Bank:Checking                     $4,500.00
+    Income:Freelance                         $-4,500.00
+
+2025-06-15 * Monthly Rent
+    Expenses:Rent                            $1,500.00
+    Assets:Bank:Checking                     $-1,500.00
+
+2025-06-20 * Luxury Watch Purchase
+    Expenses:Shopping                        $6,500.00
+    Assets:Bank:Checking                     $-6,500.00
+
+2025-06-30 * Entertainment - Festival
+    Expenses:Entertainment                   $350.00
+    Assets:Bank:Checking                     $-350.00

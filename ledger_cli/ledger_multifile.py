@@ -20,7 +20,6 @@ class LedgerMultiParser:
         all_accounts = []
         all_accounts_advance = []
         all_parents = []
-        all_metadata = {}
         all_metadata_yaml = {}
         all_map_docs = []
 
@@ -29,7 +28,6 @@ class LedgerMultiParser:
             accounts = parser.parse_accounts()
             accounts_advance = parser.parse_accounts_advance()
             parents = parser.detected_parents_accounts()
-            metadata = parser.parse_metadata()
             metadata_yaml = parser.parse_metadata_yaml()
             map_doc = parser.parse_doc()
 
@@ -37,7 +35,6 @@ class LedgerMultiParser:
             all_accounts.extend(accounts)
             all_accounts_advance.extend(accounts_advance)
             all_parents.extend(parents)
-            all_metadata.update(metadata)
             all_metadata_yaml.update(metadata_yaml)
             all_map_docs.append(map_doc)
         
@@ -52,7 +49,6 @@ class LedgerMultiParser:
             "accounts": all_accounts,
             "accounts_advance": all_accounts_advance,
             "parents": all_parents,
-            "metadata": all_metadata,
             "metadata_yaml": all_metadata_yaml,
             "map_docs": all_map_docs,
         }

@@ -1,0 +1,131 @@
+ID,Fecha,Concepto,Debe,Haber,Descripción
+1,2025-01-01,Assets:Bank:Checking,10000.0,,Opening Balances
+1,2025-01-01,Assets:Bank:Savings,25000.0,,Opening Balances
+1,2025-01-01,Assets:Cash,1000.0,,Opening Balances
+1,2025-01-01,Assets:Investments:Stocks,15000.0,,Opening Balances
+1,2025-01-01,Liabilities:CreditCard:Visa,,2500.0,Opening Balances
+1,2025-01-01,Liabilities:Loan:CarLoan,,10000.0,Opening Balances
+1,2025-01-01,Equity:OpeningBalances,,38500.0,Opening Balances
+2,2025/01/01,Activos:Banco,25000.0,,Salario Mensual
+2,2025/01/01,Ingresos:Salarios,,25000.0,Salario Mensual
+3,2025-01-02,Gastos:Comida,1200.0,,Compra de alimentos
+3,2025-01-02,Activos:Banco,,1200.0,Compra de alimentos
+4,2025-01-02,Gastos:Comida,86.21,,Compra de alimentos
+4,2025-01-02,Activos:Banco,,100.0,Compra de alimentos
+4,2025-01-02,Assets:Taxes:IVA,13.79,,Compra de alimentos
+5,2025-01-03,Gastos:Transporte,500.0,,Transporte público
+5,2025-01-03,Activos:Banco,,500.0,Transporte público
+6,2025-01-03,Gastos:Transporte,500.0,,Transporte público
+6,2025-01-03,Activos:Banco,,500.0,Transporte público
+7,2025-01-05,Gastos:Comida,750.0,,Cena en restaurante
+7,2025-01-05,Activos:Banco,,750.0,Cena en restaurante
+8,2025-01-05,Gastos:Comida,750.0,,Cena en restaurante
+8,2025-01-05,Activos:Banco,,870.0,Cena en restaurante
+8,2025-01-05,Assets:Taxes:IVA,120.0,,Cena en restaurante
+9,2025-01-07,Pasivos:Tarjeta,5000.0,,Pago de tarjeta de crédito
+9,2025-01-07,Activos:Banco,,5000.0,Pago de tarjeta de crédito
+10,2025-01-07,Pasivos:Tarjeta,5000.0,,Pago de tarjeta de crédito
+10,2025-01-07,Activos:Banco,,5000.0,Pago de tarjeta de crédito
+11,2025-01-08,Gastos:Entretenimiento,250.0,,Suscripción de streaming
+11,2025-01-08,Activos:Banco,25000.0,,Suscripción de streaming
+11,2025-01-08,Ingresos:Salarios,,29000.0,Suscripción de streaming
+11,2025-01-08,Assets:Taxes:IVA,4000.0,,Suscripción de streaming
+12,2025-01-08,Gastos:Entretenimiento,215.52,,Suscripción de streaming
+12,2025-01-08,Activos:Banco,,250.0,Suscripción de streaming
+12,2025-01-08,Assets:Taxes:IVA,34.48,,Suscripción de streaming
+13,2025-01-10,Gastos:Transporte,300.0,,Transporte (taxi)
+13,2025-01-10,Activos:Banco,,300.0,Transporte (taxi)
+14,2025-01-12,Gastos:Comida,2100.0,,Supermercado
+14,2025-01-12,Activos:Banco,,2100.0,Supermercado
+15,2025-01-15,Assets:Bank:Checking,7500.0,,Paycheck
+15,2025-01-15,Income:Salary,,7500.0,Paycheck
+16,2025-01-15,Activos:Banco,10000.0,,Salario extra
+16,2025-01-15,Ingresos:Salarios,,10000.0,Salario extra
+17,2025-01-16,Pasivos:Tarjeta,3000.0,,Pago parcial tarjeta de crédito
+17,2025-01-16,Activos:Banco,,3000.0,Pago parcial tarjeta de crédito
+18,2025-01-17,Gastos:Entretenimiento,400.0,,Cine
+18,2025-01-17,Activos:Banco,,400.0,Cine
+19,2025-01-17,Gastos:Transporte,1000.0,,Gasolina
+19,2025-01-17,Activos:Banco,,1000.0,Gasolina
+20,2025-01-18,Gastos:Comida,600.0,,Pago de luz
+20,2025-01-18,Activos:Banco,,600.0,Pago de luz
+21,2025-01-18,Gastos:Comida,800.0,,Comida rápida
+21,2025-01-18,Activos:Banco,,800.0,Comida rápida
+22,2025-01-18,Gastos:Transporte,450.0,,Transporte privado
+22,2025-01-18,Activos:Banco,,450.0,Transporte privado
+23,2025-01-20,Expenses:Food:Groceries,100.0,,Grocery Shopping
+23,2025-01-20,Assets:Bank:Checking,,116.0,Grocery Shopping
+23,2025-01-20,Assets:Taxes:IVA,16.0,,Grocery Shopping
+24,2025-01-20,Expenses:Food:Groceries,100.0,,Grocery Shopping
+24,2025-01-20,Assets:Bank:Checking,,116.0,Grocery Shopping
+24,2025-01-20,Assets:Taxes:IVA,16.0,,Grocery Shopping
+25,2025-01-20,Expenses:Food:Groceries,250.0,,Grocery Shopping
+25,2025-01-20,Assets:Bank:Checking,,250.0,Grocery Shopping
+26,2025-01-22,Expenses:Rent,1500.0,,Rent Payment
+26,2025-01-22,Assets:Bank:Checking,,1500.0,Rent Payment
+27,2025-01-23,Expenses:Food:DiningOut,75.0,,Dinner Out
+27,2025-01-23,Assets:Bank:Checking,,75.0,Dinner Out
+28,2025-01-25,Liabilities:CreditCard:Visa,1200.0,,Credit Card Payment
+28,2025-01-25,Assets:Bank:Checking,,1200.0,Credit Card Payment
+29,2025-02-01,Assets:Bank:Checking,7500.0,,Paycheck
+29,2025-02-01,Income:Salary,,7500.0,Paycheck
+30,2025-02-03,Expenses:Utilities,300.0,,Utilities Bill
+30,2025-02-03,Assets:Bank:Checking,,300.0,Utilities Bill
+31,2025-02-10,Expenses:Transportation:Gas,120.0,,Gasoline
+31,2025-02-10,Assets:Bank:Checking,,120.0,Gasoline
+32,2025-02-15,Assets:Bank:Checking,3200.0,,Freelance Project
+32,2025-02-15,Income:Freelance,,3200.0,Freelance Project
+33,2025-02-20,Liabilities:Loan:CarLoan,500.0,,Car Loan Payment
+33,2025-02-20,Assets:Bank:Checking,,500.0,Car Loan Payment
+34,2025-02-22,Assets:Bank:Savings,1000.0,,Stock Dividend
+34,2025-02-22,Income:Investments:Dividends,,1000.0,Stock Dividend
+35,2025-02-28,Expenses:Travel,2800.0,,Vacation Trip
+35,2025-02-28,Assets:Bank:Checking,,2800.0,Vacation Trip
+36,2025-03-01,Assets:Bank:Checking,7500.0,,Paycheck
+36,2025-03-01,Income:Salary,,7500.0,Paycheck
+37,2025-03-02,Expenses:Insurance:Health,450.0,,Health Insurance
+37,2025-03-02,Assets:Bank:Checking,,450.0,Health Insurance
+38,2025-03-10,Expenses:Transportation:Maintenance,90.0,,Maintenance: Oil Change
+38,2025-03-10,Assets:Bank:Checking,,90.0,Maintenance: Oil Change
+39,2025-03-15,Expenses:Rent,1500.0,,Monthly Rent
+39,2025-03-15,Assets:Bank:Checking,,1500.0,Monthly Rent
+40,2025-03-18,Expenses:Education,300.0,,Course Subscription
+40,2025-03-18,Assets:Bank:Checking,,300.0,Course Subscription
+41,2025-03-25,Expenses:Entertainment,200.0,,Entertainment - Concert
+41,2025-03-25,Assets:Bank:Checking,,200.0,Entertainment - Concert
+42,2025-04-01,Assets:Bank:Checking,7500.0,,Paycheck
+42,2025-04-01,Income:Salary,,7500.0,Paycheck
+43,2025-04-02,Expenses:Medical,1200.0,,Dentist Appointment
+43,2025-04-02,Assets:Bank:Checking,,1200.0,Dentist Appointment
+44,2025-04-10,Expenses:Transportation:Gas,130.0,,Gasoline
+44,2025-04-10,Assets:Bank:Checking,,130.0,Gasoline
+45,2025-04-15,Expenses:Rent,1500.0,,Monthly Rent
+45,2025-04-15,Assets:Bank:Checking,,1500.0,Monthly Rent
+46,2025-04-20,Expenses:Shopping,3000.0,,Shopping - Electronics
+46,2025-04-20,Assets:Bank:Checking,,3000.0,Shopping - Electronics
+47,2025-04-25,Expenses:Food:DiningOut,100.0,,Dinner Out
+47,2025-04-25,Assets:Bank:Checking,,100.0,Dinner Out
+48,2025-05-01,Assets:Bank:Checking,7500.0,,Paycheck
+48,2025-05-01,Income:Salary,,7500.0,Paycheck
+49,2025-05-03,Expenses:Utilities,310.0,,Utilities
+49,2025-05-03,Assets:Bank:Checking,,310.0,Utilities
+50,2025-05-06,Expenses:Travel,5800.0,,Travel - Family Emergency
+50,2025-05-06,Assets:Bank:Checking,,5800.0,Travel - Family Emergency
+51,2025-05-10,Expenses:Food:Groceries,270.0,,Grocery Shopping
+51,2025-05-10,Assets:Bank:Checking,,270.0,Grocery Shopping
+52,2025-05-15,Expenses:Rent,1500.0,,Monthly Rent
+52,2025-05-15,Assets:Bank:Checking,,1500.0,Monthly Rent
+53,2025-05-25,Expenses:Transportation:Maintenance,2200.0,,Car Repair (transmission)
+53,2025-05-25,Assets:Bank:Checking,,2200.0,Car Repair (transmission)
+54,2025-06-01,Assets:Bank:Checking,7500.0,,Paycheck
+54,2025-06-01,Income:Salary,,7500.0,Paycheck
+55,2025-06-03,Expenses:Insurance:Health,450.0,,Health Insurance
+55,2025-06-03,Assets:Bank:Checking,,450.0,Health Insurance
+56,2025-06-10,Assets:Bank:Checking,4500.0,,Freelance Payment
+56,2025-06-10,Income:Freelance,,4500.0,Freelance Payment
+57,2025-06-15,Expenses:Rent,1500.0,,Monthly Rent
+57,2025-06-15,Assets:Bank:Checking,,1500.0,Monthly Rent
+58,2025-06-20,Expenses:Shopping,6500.0,,Luxury Watch Purchase
+58,2025-06-20,Assets:Bank:Checking,,6500.0,Luxury Watch Purchase
+59,2025-06-30,Expenses:Entertainment,350.0,,Entertainment - Festival
+59,2025-06-30,Assets:Bank:Checking,,350.0,Entertainment - Festival
