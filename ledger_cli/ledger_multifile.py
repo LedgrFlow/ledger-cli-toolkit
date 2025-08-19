@@ -1,5 +1,5 @@
 from .ledger import LedgerParser
-from utils import sort_transactions, remove_duplicates
+from ..utils import sort_transactions, remove_duplicates
 
 class LedgerMultiParser:
     def __init__(self, files, parents_accounts=None):
