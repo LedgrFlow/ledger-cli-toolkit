@@ -6,7 +6,11 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="ledger-cli-toolkit",
+<<<<<<< HEAD
     version="1.2.0",  # Cambia según el versionado de tu proyecto
+=======
+    version="1.6.0",  # Cambia según el versionado de tu proyecto
+>>>>>>> 5439302 (Primer commit)
     author="Eduardo Rangel",
     author_email="dante61918@gmail.com",
     description="Librería para manipular archivos de contabilidad en formato .ledger.",

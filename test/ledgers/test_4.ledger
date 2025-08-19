@@ -1,0 +1,355 @@
+---
+data:
+  title: "Demo de archivo ledger"
+  year: 2025
+
+taxes:
+  IVA: .16
+  ISR: .3
+
+snippets:
+  gasolina: |
+    $DATE * Gasolina
+        Expenses:Transport  $monto
+        Assets:Cash
+
+  sueldo: |
+    $DATE * Sueldo
+        Assets:Bank:Checking  $monto
+        Income:Salary
+---
+
+
+; ==============================
+;         Plan de cuentas
+; ==============================
+
+; Activos
+account Assets:Bank:Checking
+  description Money in your bank account
+  alias Bank Account
+  type asset
+
+account Assets:Bank:Savings
+  description Money in your savings account
+  alias Savings Account
+  type asset
+
+account Assets:Cash
+  description Money in your wallet
+  alias Cash
+  type asset
+
+account Assets:Investments:Stocks
+  description Money invested in stocks
+  alias Stocks
+  type asset
+account Assets:AccountsReceivable
+  description Money received from your customers
+  alias Receivable
+  type asset
+
+; Pasivos
+account Liabilities:CreditCard:Visa
+  description Money owed to your credit card
+  alias Credit Card
+  type liability
+
+account Liabilities:Loan:CarLoan
+  description Money owed to you by your car loan
+  alias Loan
+  type liability
+
+; Capital
+account Equity:OpeningBalances
+  description Opening balances
+  alias Opening Balances
+  type equity
+account Equity:Owner
+  description Capital owned by you
+  alias Owner
+  type equity
+
+; Ingresos
+account Income:Salary
+  description Salary income
+  alias Salary
+  type income
+account Income:Investments:Dividends
+  description Dividend income
+  alias Dividends
+  type income
+account Income:Freelance
+  description Freelance income
+  alias Freelance
+  type income
+
+; Egresos
+account Expenses:Rent
+  description Rent expense
+  alias Rent
+  type expense
+account Expenses:Utilities
+  description Utilities expense
+  alias Utilities
+  type expense
+account Expenses:Food:Groceries
+  description Groceries expense
+  alias Groceries
+  type expense
+account Expenses:Food:DiningOut
+  description Dining out expense
+  alias Dining Out
+  type expense
+account Expenses:Transportation:Gas
+  description Gas expense
+  alias Gas
+  type expense
+account Expenses:Transportation:Maintenance
+  description Maintenance expense
+  alias Maintenance
+  type expense
+account Expenses:Entertainment
+  description Entertainment expense
+  alias Entertainment
+  type expense
+account Expenses:Travel
+  description Travel expense
+  alias Travel
+  type expense
+account Expenses:Insurance:Car
+  description Car insurance expense
+  alias Car Insurance
+  type expense
+account Expenses:Insurance:Health
+  description Health insurance expense
+  alias Health Insurance
+  type expense
+account Expenses:Education
+  description Education expense
+  alias Education
+  type expense
+account Expenses:Medical
+  description Medical expense
+  alias Medical
+  type expense
+account Expenses:Shopping
+  description Shopping expense
+  alias Shopping
+  type expense
+
+; ==============================
+;         Transacciones
+; ==============================
+
+2025-01-01 * Opening Balances
+  Assets:Bank:Checking              $10,000.00
+  Assets:Bank:Savings               $25,000.00
+  Assets:Cash                        $1,000.00
+  Assets:Investments:Stocks         $15,000.00
+  Liabilities:CreditCard:Visa       $-2,500.00
+  Liabilities:Loan:CarLoan         $-10,000.00
+  Equity:OpeningBalances           $-38,500.00
+
+2025-01-15 * Paycheck
+  Assets:Bank:Checking              $7,500.00
+  Income:Salary
+  -tags: salary 
+
+2025-01-20 * Grocery Shopping
+  Expenses:Food:Groceries           $100.00 +{IVA} 
+  Assets:Bank:Checking
+
+2025-01-22 * Rent Payment
+  Expenses:Rent                   $1,500.00
+  Assets:Bank:Checking
+
+2025-01-23 * Dinner Out
+  Expenses:Food:DiningOut            $75.00
+  Assets:Bank:Checking
+
+2025-01-25 * Credit Card Payment
+  Liabilities:CreditCard:Visa     $1,200.00
+  Assets:Bank:Checking
+
+2025-02-01 * Paycheck
+  Assets:Bank:Checking              $7,500.00
+  Income:Salary
+
+2025-02-03 * Utilities Bill
+  Expenses:Utilities                $300.00
+  Assets:Bank:Checking
+
+2025-02-10 * Gasoline
+  Expenses:Transportation:Gas       $120.00
+  Assets:Bank:Checking
+
+2025-02-15 * Freelance Project
+  Assets:Bank:Checking              $3,200.00
+  Income:Freelance
+
+2025-02-20 * Car Loan Payment
+  Liabilities:Loan:CarLoan         $500.00
+  Assets:Bank:Checking
+
+2025-02-22 * Stock Dividend
+  Assets:Bank:Savings               $1,000.00
+  Income:Investments:Dividends
+
+2025-02-28 * Vacation Trip
+  Expenses:Travel                 $2,800.00
+  Assets:Bank:Checking
+
+2025-03-01 * Paycheck
+  Assets:Bank:Checking              $7,500.00
+  Income:Salary
+
+2025-03-02 * Health Insurance
+  Expenses:Insurance:Health         $450.00
+  Assets:Bank:Checking
+
+2025-03-10 * Maintenance: Oil Change
+  Expenses:Transportation:Maintenance $90.00
+  Assets:Bank:Checking
+
+2025-03-15 * Monthly Rent
+  Expenses:Rent                   $1,500.00
+  Assets:Bank:Checking
+
+2025-03-18 * Course Subscription
+  Expenses:Education                $300.00
+  Assets:Bank:Checking
+
+2025-03-25 * Entertainment - Concert
+  Expenses:Entertainment            $200.00
+  Assets:Bank:Checking
+
+; ==============================
+; Abril 2025
+; ==============================
+
+2025-04-01 * Paycheck
+  Assets:Bank:Checking              $7,500.00
+  Income:Salary
+
+2025-04-02 * Dentist Appointment
+  Expenses:Medical                  $1,200.00
+  Assets:Bank:Checking
+
+2025-04-10 * Gasoline
+  Expenses:Transportation:Gas       $130.00
+  Assets:Bank:Checking
+
+2025-04-15 * Monthly Rent
+  Expenses:Rent                   $1,500.00
+  Assets:Bank:Checking
+
+2025-04-20 * Shopping - Electronics
+  Expenses:Shopping                 $3,000.00
+  Assets:Bank:Checking
+
+2025-04-25 * Dinner Out
+  Expenses:Food:DiningOut           $100.00
+  Assets:Bank:Checking
+
+; ==============================
+; Mayo 2025
+; ==============================
+
+2025-05-01 * Paycheck
+  Assets:Bank:Checking              $7,500.00
+  Income:Salary
+
+2025-05-03 * Utilities
+  Expenses:Utilities                $310.00
+  Assets:Bank:Checking
+
+2025-05-06 * Travel - Family Emergency
+  Expenses:Travel                 $5,800.00
+  Assets:Bank:Checking
+
+2025-05-10 * Grocery Shopping
+  Expenses:Food:Groceries           $270.00
+  Assets:Bank:Checking
+
+2025-05-15 * Monthly Rent
+  Expenses:Rent                   $1,500.00
+  Assets:Bank:Checking
+
+2025-05-25 * Car Repair (transmission)
+  Expenses:Transportation:Maintenance $2,200.00
+  Assets:Bank:Checking
+
+; ==============================
+; Junio 2025
+; ==============================
+
+2025-06-01 * Paycheck
+  Assets:Bank:Checking              $7,500.00
+  Income:Salary
+
+2025-06-03 * Health Insurance
+  Expenses:Insurance:Health         $450.00
+  Assets:Bank:Checking
+
+2025-06-10 * Freelance Payment
+  Assets:Bank:Checking              $4,500.00
+  Income:Freelance
+
+2025-06-15 * Monthly Rent
+  Expenses:Rent                   $1,500.00
+  Assets:Bank:Checking
+
+2025-06-20 * Luxury Watch Purchase
+  Expenses:Shopping                 $6,500.00
+  Assets:Bank:Checking
+
+2025-06-30 * Entertainment - Festival
+  Expenses:Entertainment            $350.00
+  Assets:Bank:Checking
+            
+2025-07-29 * Sueldo
+  Assets:Bank:Checking  $200
+  Income:Salary
+
+2025-07-29 * Sueldo
+  Assets:Bank:Checking  $100
+  Income:Salary
+
+2025-07-29 * Gasolina
+  Expenses:Transport  100.00
+  Assets:Bank:Checking 
+
+2025-07-30 * Gasolina
+  Expenses:Transport  100.00
+  Assets:Cash
+
+2025-07-31 * Sueldo
+  Assets:Bank:Checking  100.00
+  Income:Salary
+
+2025-07-31 * Sueldo
+  Assets:Bank:Checking  100.00
+  Income:Salary
+
+2025-07-29 * Sueldo
+  Assets:Bank:Checking  100.00
+  Expenses:Education
+
+2025-07-29 * Sueldo
+  Assets:Bank:Checking  100.00
+  Income:Salary
+
+2025-07-29 * Sueldo
+  Assets:Bank:Checking  100.00
+  Income:Salary
+
+
+2025-07-29 * Sueldo
+    Assets:Bank:Checking  100.00
+    Income:Salary
+
+2025-07-29 * Gasolina
+    Expenses:Transport  100.00
+    Assets:Cash
+

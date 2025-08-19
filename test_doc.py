@@ -5,6 +5,11 @@ from ledger_cli import (
     LedgerParser,
     LedgerGrafics,
     LedgerAnalyst,
+<<<<<<< HEAD
+=======
+    LedgerExport,
+    LedgerMultiParser,
+>>>>>>> 5439302 (Primer commit)
 )
 
 
@@ -31,7 +36,13 @@ if __name__ == "__main__":
     # Nombre del archivo con fecha y hora
     now = datetime.now()
     timestamp = now.strftime("%Y-%m-%d_%H-%M-%S")
+<<<<<<< HEAD
     filePath = "test/ledgers/test_2.ledger"
+=======
+    filePath = "test/ledgers/test_4.ledger"
+    filePath2 = "test/ledgers/test_2.ledger"
+    filePath3 = "test/ledgers/test_3.ledger"
+>>>>>>> 5439302 (Primer commit)
     output_path = os.path.join(
         output_dir, f"output_{filePath.split("/")[2]}_{timestamp}.md"
     )
@@ -46,14 +57,20 @@ if __name__ == "__main__":
     }
 
     parser = LedgerParser(
+<<<<<<< HEAD
         file_path=filePath,
         file_accounts_path=filePath,
+=======
+        file=filePath,
+        file_accounts=filePath,
+>>>>>>> 5439302 (Primer commit)
         parents_accounts=other_parents,
     )
     visual = LedgerVisual()
     grafics = LedgerGrafics()
 
     # Parse the transactions and accounts
+<<<<<<< HEAD
     transactions_json = parser.parse()
     accounts_list = parser.parse_accounts()
     accounts_advance = parser.parse_accounts_advance()
@@ -66,6 +83,21 @@ if __name__ == "__main__":
         expense_parents=("Gastos", "Expenses"),
         asset_parents=("Activos", "Assets"),
         liability_parents=("Pasivos", "Liabilities"),
+=======
+    transactions_json = parser.parse_transactions()
+    parents = parser.detected_parents_accounts()
+    accounts_list = parser.parse_accounts()
+    accounts_advance = parser.parse_accounts_advance()
+    metadata = parser.parse_metadata()
+    metadata_yaml = parser.parse_metadata_yaml()
+    map_doc = parser.parse_doc()
+    resolved_transactions = parser.resolve(
+        transactions_json,
+        {
+            "IVA": {"percentage": 0.16},
+            "RET_ISR": {"percentage": 0.10},
+        },
+>>>>>>> 5439302 (Primer commit)
     )
 
     balances = parser.calculate_balances(
@@ -80,12 +112,40 @@ if __name__ == "__main__":
     )
     period = parser.get_date_range(transactions_json=transactions_json)
 
+<<<<<<< HEAD
     # Graficos y exportación
     grafics.create_balance_chart(balances, f"({period[0]} - {period[1]})")
     grafics.create_balance_pie_chart(balances, f"({period[0]} - {period[1]})")
     grafics.show_chart()
 
     # Cálculos analyst
+=======
+    # Multiparser
+    multi_parser = LedgerMultiParser(
+        files=[filePath, filePath2, filePath3],
+        parents_accounts=other_parents,
+    )
+
+    parsers_all = multi_parser.parse_all()
+    resolved_all = multi_parser.resolve_all()
+
+    # Graficos y exportación
+    # grafics.create_balance_chart(balances, f"({period[0]} - {period[1]})")
+    # grafics.create_balance_pie_chart(balances, f"({period[0]} - {period[1]})")
+    # grafics.show_chart()
+
+    # Cálculos analyst
+
+    analyst = LedgerAnalyst(
+        transactions=transactions_json,
+        accounts=accounts_list,
+        income_parents=("Ingresos", "Income"),
+        expense_parents=("Gastos", "Expenses"),
+        asset_parents=("Activos", "Assets"),
+        liability_parents=("Pasivos", "Liabilities"),
+    )
+
+>>>>>>> 5439302 (Primer commit)
     daily = analyst.get_daily_incomes_expenses()
     pie_expenses = analyst.get_expenses_pie()
     pie_incomes = analyst.get_incomes_pie()
@@ -107,6 +167,21 @@ if __name__ == "__main__":
     income_dependency = analyst.get_income_dependency_ratio()
     cumulative_net_income = analyst.get_cumulative_net_income()
 
+<<<<<<< HEAD
+=======
+    # Exportación
+    export = LedgerExport(resolved_transactions, accounts_list)
+    content_xlsx, save_file_xlsx = export.export_excel("xlsx", "test_2.xlsx")
+    content_csv, save_file_csv = export.export_excel("csv", "test_2.csv")
+    content, save_file_classic = export.export_classic("test_2.ledger")
+    content_sql, save_file_sql = export.export_sql("standard", "test_2.sql")
+
+    save_file_classic()
+    save_file_xlsx()
+    save_file_csv()
+    save_file_sql()
+
+>>>>>>> 5439302 (Primer commit)
     # Escritura del archivo Markdown
     with open(output_path, "w", encoding="utf-8") as f:
         f.write("---\n")
@@ -117,6 +192,11 @@ if __name__ == "__main__":
         f.write("\n---\n\n")
         # f.write(f"\nArchivo fuente: `test_2.ledger`\n")
 
+<<<<<<< HEAD
+=======
+        f.write(f"# Reporte generado el {now.strftime('%Y-%m-%d %H:%M:%S')}\n")
+
+>>>>>>> 5439302 (Primer commit)
         # ---------- LedgerParser ----------
         write_class_header(f, "LedgerParser")
 
@@ -128,6 +208,21 @@ if __name__ == "__main__":
         )
         write_section(
             f,
+<<<<<<< HEAD
+=======
+            "resolve()",
+            "Lista de transacciones.",
+            parser.to_json(resolved_transactions),
+        )
+        write_section(
+            f,
+            "detected_parents_accounts()",
+            "Lista de cuentas padres.",
+            parser.to_json(parents),
+        )
+        write_section(
+            f,
+>>>>>>> 5439302 (Primer commit)
             "parse_accounts()",
             "Lista de cuentas contables detectadas.",
             parser.to_json(accounts_list),
@@ -177,6 +272,39 @@ if __name__ == "__main__":
             parser.to_json(metadata),
         )
 
+<<<<<<< HEAD
+=======
+        write_section(
+            f,
+            "parse_metadata_yaml()",
+            "Metadatos del archivo en formato YAML.",
+            parser.to_json(metadata_yaml),
+        )
+
+        write_section(
+            f,
+            "parse_map()",
+            "Mapa de cuentas.",
+            parser.to_json(map_doc),
+        )
+
+        # ---------- LedgerMultiParser ----------
+        write_class_header(f, "LedgerMultiParser")
+
+        write_section(
+            f,
+            "parse_all()",
+            "Parsea todos los archivos.",
+            parser.to_json(parsers_all),
+        )
+        write_section(
+            f,
+            "resolve_all()",
+            "Resolve todos los archivos.",
+            parser.to_json(resolved_all),
+        )
+
+>>>>>>> 5439302 (Primer commit)
         # ---------- LedgerAnalyst ----------
         write_class_header(f, "LedgerAnalyst")
 

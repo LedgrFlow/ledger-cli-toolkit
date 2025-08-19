@@ -1,18 +1,55 @@
+<<<<<<< HEAD
+=======
+---
+currency:
+  - MXN
+  - USD
+  - EUR
+
+Taxes:
+  IVA: 16
+  RET_ISR: 1.25
+
+snippets:
+  gasolina: |
+    $DATE * Gasolina
+        Expenses:Transport  $monto
+        Assets:Cash
+
+  sueldo: |
+    $DATE * Sueldo
+        Assets:Bank:Checking  $monto
+        Income:Salary
+---
+
+
+>>>>>>> 5439302 (Primer commit)
 ; Archivo de ejemplo para Ledger
 ; Fecha: 2025-01-18
 ; Moneda: MXN
 
+<<<<<<< HEAD
 ; Definición de cuentas
 account Activos:Banco  
+=======
+
+; Definición de cuentas
+account Activos:Banco  
+account Pasivos:Tarjeta
+>>>>>>> 5439302 (Primer commit)
 account Ingresos:Salarios
 account Gastos:Comida
 account Gastos:Transporte
 account Gastos:Entretenimiento
+<<<<<<< HEAD
 account Pasivos:Tarjeta
+=======
+>>>>>>> 5439302 (Primer commit)
 
 ; Transacciones de ejemplo
 
 2025/01/01 Salario Mensual
+<<<<<<< HEAD
     Activos:Banco                      25,000.00 MXN
     Ingresos:Salarios                
 
@@ -34,6 +71,37 @@ account Pasivos:Tarjeta
 
 2025-01-08 Suscripción de streaming
     Gastos:Entretenimiento             MXN 250.00
+=======
+    Activos:Banco                      25,000.00 MXN +{IVA, RET_ISR}
+    Ingresos:Salarios
+    -tags: salary, income
+    -uuid: f2c2a-3bd1
+    -responsible: Eduardo
+               
+
+2025-01-02 Compra de alimentos
+    Gastos:Comida                     MXN 100.00  ={IVA}
+    Activos:Banco
+    -tags: shopping, groceries, food
+    -uuid: f2c2a-3bd1
+    -ticket: [ticket](./tickets/compu-2025.jpg)
+    -responsible: Eduardo
+
+2025-01-03 Transporte público
+    Gastos:Transporte                  MXN 500.00 +{RET_ISR}
+    Activos:Banco
+
+2025-01-05 Cena en restaurante
+    Gastos:Comida                     MXN 750.00 +{IVA}
+    Activos:Banco
+
+2025-01-07 Pago de tarjeta de crédito
+    Pasivos:Tarjeta                   MXN 5,000.00 +{RET_ISR}
+    Activos:Banco
+
+2025-01-08 Suscripción de streaming
+    Gastos:Entretenimiento             MXN 250.00 ={IVA}
+>>>>>>> 5439302 (Primer commit)
     Activos:Banco
 
 2025-01-10 Transporte (taxi)

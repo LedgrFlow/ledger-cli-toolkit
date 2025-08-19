@@ -1,0 +1,40 @@
+---
+data:
+  title: "Demo de archivo ledger"
+  year: 2025
+
+currency:
+  MXN
+
+taxes:
+  IVA: .16
+  ISR: .3
+---
+
+
+account Assets:Bank:Checking
+    description: "Cuenta bancaria principal para operaciones diarias"
+    category: "Activo Corriente"
+
+account Assets:Bank:Savings
+    description: "Cuenta bancaria para ahorros"
+    category: "Activo Corriente"
+
+account Expenses:Food:Groceries
+    description: "Egresos de comida"
+    category: "Egreso Corriente"
+
+account Expenses:Food:DiningOut
+    description: "Egresos de comida rápida"
+    category: "Egreso Corriente"
+
+
+2025-01-20 * Grocery Shopping
+  Expenses:Food:Groceries           $100.00 +{IVA} 
+  Assets:Bank:Checking
+  -tags: shopping, groceries, food
+  -uuid: f2c2a-3bd1
+
+2025-01-20 * Grocery Shopping
+  Expenses:Food:Groceries           MXN 100.00 +{IVA} 
+  Assets:Bank:Checking

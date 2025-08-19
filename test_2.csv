@@ -1,0 +1,55 @@
+ID,Fecha,Concepto,Debe,Haber,Descripción
+1,2025-01-01,Assets:Bank:Checking,10000.0,,Opening Balances
+1,2025-01-01,Assets:Bank:Savings,25000.0,,Opening Balances
+1,2025-01-01,Assets:Cash,1000.0,,Opening Balances
+1,2025-01-01,Assets:Investments:Stocks,15000.0,,Opening Balances
+1,2025-01-01,Liabilities:CreditCard:Visa,,2500.0,Opening Balances
+1,2025-01-01,Liabilities:Loan:CarLoan,,10000.0,Opening Balances
+1,2025-01-01,Equity:OpeningBalances,,38500.0,Opening Balances
+2,2025-01-15,Assets:Bank:Checking,7500.0,,Paycheck
+3,2025-01-20,Expenses:Food:Groceries,100.0,,Grocery Shopping
+4,2025-01-22,Expenses:Rent,1500.0,,Rent Payment
+5,2025-01-23,Expenses:Food:DiningOut,75.0,,Dinner Out
+6,2025-01-25,Liabilities:CreditCard:Visa,1200.0,,Credit Card Payment
+7,2025-02-01,Assets:Bank:Checking,7500.0,,Paycheck
+8,2025-02-03,Expenses:Utilities,300.0,,Utilities Bill
+9,2025-02-10,Expenses:Transportation:Gas,120.0,,Gasoline
+10,2025-02-15,Assets:Bank:Checking,3200.0,,Freelance Project
+11,2025-02-20,Liabilities:Loan:CarLoan,500.0,,Car Loan Payment
+12,2025-02-22,Assets:Bank:Savings,1000.0,,Stock Dividend
+13,2025-02-28,Expenses:Travel,2800.0,,Vacation Trip
+14,2025-03-01,Assets:Bank:Checking,7500.0,,Paycheck
+15,2025-03-02,Expenses:Insurance:Health,450.0,,Health Insurance
+16,2025-03-10,Expenses:Transportation:Maintenance,90.0,,Maintenance: Oil Change
+17,2025-03-15,Expenses:Rent,1500.0,,Monthly Rent
+18,2025-03-18,Expenses:Education,300.0,,Course Subscription
+19,2025-03-25,Expenses:Entertainment,200.0,,Entertainment - Concert
+20,2025-04-01,Assets:Bank:Checking,7500.0,,Paycheck
+21,2025-04-02,Expenses:Medical,1200.0,,Dentist Appointment
+22,2025-04-10,Expenses:Transportation:Gas,130.0,,Gasoline
+23,2025-04-15,Expenses:Rent,1500.0,,Monthly Rent
+24,2025-04-20,Expenses:Shopping,3000.0,,Shopping - Electronics
+25,2025-04-25,Expenses:Food:DiningOut,100.0,,Dinner Out
+26,2025-05-01,Assets:Bank:Checking,7500.0,,Paycheck
+27,2025-05-03,Expenses:Utilities,310.0,,Utilities
+28,2025-05-06,Expenses:Travel,5800.0,,Travel - Family Emergency
+29,2025-05-10,Expenses:Food:Groceries,270.0,,Grocery Shopping
+30,2025-05-15,Expenses:Rent,1500.0,,Monthly Rent
+31,2025-05-25,Expenses:Transportation:Maintenance,2200.0,,Car Repair (transmission)
+32,2025-06-01,Assets:Bank:Checking,7500.0,,Paycheck
+33,2025-06-03,Expenses:Insurance:Health,450.0,,Health Insurance
+34,2025-06-10,Assets:Bank:Checking,4500.0,,Freelance Payment
+35,2025-06-15,Expenses:Rent,1500.0,,Monthly Rent
+36,2025-06-20,Expenses:Shopping,6500.0,,Luxury Watch Purchase
+37,2025-06-30,Expenses:Entertainment,350.0,,Entertainment - Festival
+38,2025-07-29,Assets:Bank:Checking,200.0,,Sueldo
+39,2025-07-29,Assets:Bank:Checking,100.0,,Sueldo
+40,2025-07-29,Expenses:Transport,100.0,,Gasolina
+41,2025-07-30,Expenses:Transport,100.0,,Gasolina
+42,2025-07-31,Assets:Bank:Checking,100.0,,Sueldo
+43,2025-07-31,Assets:Bank:Checking,100.0,,Sueldo
+44,2025-07-29,Assets:Bank:Checking,100.0,,Sueldo
+45,2025-07-29,Assets:Bank:Checking,100.0,,Sueldo
+46,2025-07-29,Assets:Bank:Checking,100.0,,Sueldo
+47,2025-07-29,Assets:Bank:Checking,100.0,,Sueldo
+48,2025-07-29,Expenses:Transport,100.0,,Gasolina
