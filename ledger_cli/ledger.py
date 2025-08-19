@@ -304,6 +304,7 @@ class LedgerParser:
             lines = file.readlines()
 
         current_transaction = None
+
     # ----------------------------------------------------------------------------------------------
     #                              Funciones procesamiento general
     # ----------------------------------------------------------------------------------------------
@@ -437,15 +438,18 @@ class LedgerParser:
         return line, taxes
 
     def _parse_account_line(
-    self, line: str, last_amount: float, last_unit: str
-) -> (Union[dict, None], float, str):
+        self, line: str, last_amount: float, last_unit: str
+    ) -> (Union[dict, None], float, str):
         # Extraer impuestos si existen
         line, taxes = self._extract_taxes(line)
-        
+
         # Primero verifica si es solo una cuenta (sin monto)
-        if not re.search(r'[\d\$\-\+,]', line):  # Si no hay números, $, -, +, o comas
+        if not re.search(r"[\d\$\-\+,]", line):  # Si no hay números, $, -, +, o comas
             account_name = line.strip()
-            if ":" in account_name or any(keyword in account_name.lower() for keyword in ['assets', 'liabilities', 'equity', 'income', 'expenses']):
+            if ":" in account_name or any(
+                keyword in account_name.lower()
+                for keyword in ["assets", "liabilities", "equity", "income", "expenses"]
+            ):
                 return (
                     {
                         "account": account_name,
@@ -457,87 +461,67 @@ class LedgerParser:
                     last_amount,
                     last_unit,
                 )
-    
+
         # Patrones regex MEJORADOS para manejar múltiples espacios
         patterns = [
             # Patrón 1: Cuenta + unidad separada + cantidad (ej: "Account USD 100.00")
-            r'^(?P<account>[A-Za-z0-9:_\s]+?)\s{2,}(?P<unit>[A-Z]{2,3}|\$)\s+(?P<amount>-?\$?[\d,]+(?:\.\d+)?)$',
-            
+            r"^(?P<account>[A-Za-z0-9:_\s]+?)\s{2,}(?P<unit>[A-Z]{2,3}|\$)\s+(?P<amount>-?\$?[\d,]+(?:\.\d+)?)$",
             # Patrón 2: Cuenta + cantidad + unidad separada (ej: "Account 100.00 USD")
-            r'^(?P<account>[A-Za-z0-9:_\s]+?)\s{2,}(?P<amount>-?\$?[\d,]+(?:\.\d+)?)\s+(?P<unit>[A-Z]{2,3}|\$)$',
-            
+            r"^(?P<account>[A-Za-z0-9:_\s]+?)\s{2,}(?P<amount>-?\$?[\d,]+(?:\.\d+)?)\s+(?P<unit>[A-Z]{2,3}|\$)$",
             # Patrón 3: Cuenta + cantidad con símbolo $ pegado (ej: "Account $-100.00")
-            r'^(?P<account>[A-Za-z0-9:_\s]+?)\s{2,}(?P<amount_unit>-?\$[\d,]+(?:\.\d+)?)$',
-            
+            r"^(?P<account>[A-Za-z0-9:_\s]+?)\s{2,}(?P<amount_unit>-?\$[\d,]+(?:\.\d+)?)$",
             # Patrón 4: Cuenta + cantidad con símbolo $ pegado (ej: "Account -$100.00")
-            r'^(?P<account>[A-Za-z0-9:_\s]+?)\s{2,}(?P<amount_unit>\$-?[\d,]+(?:\.\d+)?)$',
-            
+            r"^(?P<account>[A-Za-z0-9:_\s]+?)\s{2,}(?P<amount_unit>\$-?[\d,]+(?:\.\d+)?)$",
             # Patrón 5: Cuenta + cantidad sin unidad (ej: "Account 100.00")
-            r'^(?P<account>[A-Za-z0-9:_\s]+?)\s{2,}(?P<amount>-?[\d,]+(?:\.\d+)?)$',
-            
+            r"^(?P<account>[A-Za-z0-9:_\s]+?)\s{2,}(?P<amount>-?[\d,]+(?:\.\d+)?)$",
             # Patrón 6: Cuenta + unidad + cantidad (menos espacios)
-            r'^(?P<account>[A-Za-z0-9:_\s]+)\s+(?P<unit>[A-Z]{2,3}|\$)\s+(?P<amount>-?\$?[\d,]+(?:\.\d+)?)$',
-            
+            r"^(?P<account>[A-Za-z0-9:_\s]+)\s+(?P<unit>[A-Z]{2,3}|\$)\s+(?P<amount>-?\$?[\d,]+(?:\.\d+)?)$",
             # Patrón 7: Cuenta + cantidad con $ (menos espacios)
-            r'^(?P<account>[A-Za-z0-9:_\s]+)\s+(?P<amount_unit>-?\$[\d,]+(?:\.\d+)?)$',
-            
+            r"^(?P<account>[A-Za-z0-9:_\s]+)\s+(?P<amount_unit>-?\$[\d,]+(?:\.\d+)?)$",
             # Patrón 8: Solo cuenta (usa último monto)
-            r'^(?P<account>[A-Za-z0-9:_\s]+)$'
+            r"^(?P<account>[A-Za-z0-9:_\s]+)$",
         ]
-    
+
         for pattern in patterns:
             match = re.match(pattern, line, re.IGNORECASE)
             if match:
                 account_name = match.group("account").strip()
                 amount = None
                 unit = last_unit or "N/A"
-                
-                # Debug: imprimir el patrón que coincidió
-                print(f"DEBUG: Pattern matched - {pattern}")
-                print(f"DEBUG: Line - '{line}'")
-                print(f"DEBUG: Groups - {match.groups()}")
-                
+
                 # Procesar según el patrón que coincidió
                 if "amount_unit" in match.groupdict() and match.group("amount_unit"):
                     # Patrón 3 o 4: cantidad con $ pegado
                     amount_str = match.group("amount_unit")
                     unit = "$"
                     # Extraer solo la parte numérica
-                    amount_str = re.sub(r'[^\d\-\.]', '', amount_str)
-                    print(f"DEBUG: amount_unit found - {amount_str}")
-                    
+                    amount_str = re.sub(r"[^\d\-\.]", "", amount_str)
+
                 elif "amount" in match.groupdict() and match.group("amount"):
                     # Patrones 1, 2, 5: cantidad separada
                     amount_str = match.group("amount")
                     if "unit" in match.groupdict() and match.group("unit"):
                         unit = match.group("unit")
-                    print(f"DEBUG: amount found - {amount_str}")
-                
+
                 else:
                     # Patrón 8: solo cuenta
                     amount_str = None
-                    print(f"DEBUG: Only account found")
-                
+
                 # Procesar el monto
                 if amount_str:
                     # Limpiar el string del monto
-                    amount_str = amount_str.replace('$', '').replace(',', '')
+                    amount_str = amount_str.replace("$", "").replace(",", "")
                     try:
                         amount = float(amount_str)
-                        print(f"DEBUG: Parsed amount - {amount}")
                     except ValueError:
                         amount = -last_amount if last_amount else 0.0
-                        print(f"DEBUG: ValueError, using last_amount - {amount}")
                 else:
                     amount = -last_amount if last_amount else 0.0
-                    print(f"DEBUG: No amount_str, using last_amount - {amount}")
-                
+
                 # Si la unidad es "$", asegurarse de que esté en formato consistente
                 if unit == "$":
                     unit = "$"  # Mantener como símbolo de dólar
-                
-                print(f"DEBUG: Final - account: {account_name}, amount: {amount}, unit: {unit}")
-                
+
                 return (
                     {
                         "account": account_name,
@@ -549,9 +533,7 @@ class LedgerParser:
                     amount,
                     unit,
                 )
-        
-        print(f"DEBUG: NO PATTERN MATCHED for line: '{line}'")
-        
+
         # Si ningún patrón coincide, tratar como cuenta sin monto
         return (
             {
@@ -566,28 +548,28 @@ class LedgerParser:
         )
 
     def parse_transactions(
-    self,
-) -> List[Dict[str, Union[str, List[Dict[str, Union[str, float]]]]]]:
+        self,
+    ) -> List[Dict[str, Union[str, List[Dict[str, Union[str, float]]]]]]:
         """Función para parsear el contenido del archivo Ledger y extraer las transacciones."""
-    
+
         transactions = []
         content = self._get_content()
         lines = content.splitlines()
-    
+
         current_transaction = None
         last_amount = None
         last_unit = None
-    
+
         for line in lines:
             line = line.strip()
-    
+
             if self._is_comment_or_empty(line):
                 # Save the current transaction and reset on comments/empty lines
                 if current_transaction:
                     transactions.append(current_transaction)
                     current_transaction = None
                 continue
-            
+
             if self._is_transaction_header(line):
                 # Save previous transaction if exists
                 if current_transaction:
@@ -595,24 +577,24 @@ class LedgerParser:
                 current_transaction = self._parse_transaction_header(line)
                 current_transaction["properties"] = []
                 continue
-            
+
             if current_transaction:
                 prop = self._extract_property_line(line)
                 if prop:
                     current_transaction["properties"].append(prop)
                     continue
-                
+
                 # Usa tu método auxiliar existente _parse_account_line
                 account_entry, last_amount, last_unit = self._parse_account_line(
                     line, last_amount, last_unit
                 )
                 if account_entry:
                     current_transaction["accounts"].append(account_entry)
-    
+
         # Add the last transaction if any
         if current_transaction:
             transactions.append(current_transaction)
-    
+
         return transactions
 
     def parse_doc(self) -> List[Dict[str, Union[int, List[int], str, List[str]]]]:
@@ -1368,23 +1350,23 @@ class LedgerParser:
             utility_by_currency[currency] = income + expenses
             # Ledger: Income viene como negativo → lo convertimos a positivo
             income_amount = abs(amount)
-                    # Sumar ingresos por cada moneda
+            # Sumar ingresos por cada moneda
             if currency not in total_income_by_currency:
-                    total_income_by_currency[currency] = 0
-                    total_income_by_currency[currency] += income_amount
-                    income_details.append(
-                        {account: {"currency": currency, "amount": income_amount}}
-                    )
+                total_income_by_currency[currency] = 0
+                total_income_by_currency[currency] += income_amount
+                income_details.append(
+                    {account: {"currency": currency, "amount": income_amount}}
+                )
             elif account.startswith(self.parents_accounts["Expenses"]):
-                    # Ledger: Expenses viene como positivo → lo convertimos a negativo
-                    expense_amount = -abs(amount)
-                    # Sumar gastos por cada moneda
-                    if currency not in total_expenses_by_currency:
-                        total_expenses_by_currency[currency] = 0
-                    total_expenses_by_currency[currency] += expense_amount
-                    expenses_details.append(
-                        {account: {"currency": currency, "amount": expense_amount}}
-                    )
+                # Ledger: Expenses viene como positivo → lo convertimos a negativo
+                expense_amount = -abs(amount)
+                # Sumar gastos por cada moneda
+                if currency not in total_expenses_by_currency:
+                    total_expenses_by_currency[currency] = 0
+                total_expenses_by_currency[currency] += expense_amount
+                expenses_details.append(
+                    {account: {"currency": currency, "amount": expense_amount}}
+                )
 
         # Calcular utilidad por cada moneda presente en ingresos o gastos
         all_currencies = set(total_income_by_currency.keys()).union(
@@ -1601,16 +1583,19 @@ class LedgerParser:
                 unique.append(item)
 
         return unique
-    
+
     # ----------------------------------------------------------------------------------------------
     #                              Funciones de unidad
     # ----------------------------------------------------------------------------------------------
-    
-    def unify_currencies(self, balances: Dict[str, Dict[str, float]], 
-                     exchange_rates: Dict[str, float], 
-                     target_currency: str, 
-                     default_currency: str = "USD",
-                     base_currency: str = "USD") -> Dict[str, Dict[str, float]]:
+
+    def unify_currencies(
+        self,
+        balances: Dict[str, Dict[str, float]],
+        exchange_rates: Dict[str, float],
+        target_currency: str,
+        default_currency: str = "USD",
+        base_currency: str = "USD",
+    ) -> Dict[str, Dict[str, float]]:
         """
         Unifica todas las monedas a la moneda objetivo especificada.
 
@@ -1631,11 +1616,15 @@ class LedgerParser:
             raise ValueError(f"Tasa de cambio para {target_currency} no proporcionada")
 
         if base_currency not in exchange_rates:
-            raise ValueError(f"Tasa de cambio para la moneda base {base_currency} no proporcionada")
+            raise ValueError(
+                f"Tasa de cambio para la moneda base {base_currency} no proporcionada"
+            )
 
         # Obtener la tasa de la moneda objetivo con respecto a la base
         target_rate = exchange_rates[target_currency]
-        base_rate = exchange_rates[base_currency]  # Siempre debería ser 1 si base_currency es la referencia
+        base_rate = exchange_rates[
+            base_currency
+        ]  # Siempre debería ser 1 si base_currency es la referencia
 
         for account, currency_amounts in balances.items():
             unified_balances[account] = {}
@@ -1671,10 +1660,15 @@ class LedgerParser:
             unified_balances[account][target_currency] = round(total_in_target, 2)
 
         return unified_balances
-    
-    def verify_currency_conversion(self, amount: float, from_currency: str, 
-                              to_currency: str, exchange_rates: Dict[str, float],
-                              base_currency: str = "USD") -> float:
+
+    def verify_currency_conversion(
+        self,
+        amount: float,
+        from_currency: str,
+        to_currency: str,
+        exchange_rates: Dict[str, float],
+        base_currency: str = "USD",
+    ) -> float:
         """
         Verifica y realiza la conversión de moneda de forma individual.
 
@@ -1729,7 +1723,7 @@ class LedgerParser:
             transaction_string = self._create_transaction(date, description, accounts)
             file.write(transaction_string)
             file.write("\n")
-            
+
     # FUNCIONES AUXILIARES
 
     def get_date_range(

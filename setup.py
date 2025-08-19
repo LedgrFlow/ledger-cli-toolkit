@@ -9,7 +9,7 @@ setup(
     version="1.8.0",  # Cambia según el versionado de tu proyecto
     author="Eduardo Rangel",
     author_email="dante61918@gmail.com",
-    description="Librería para manipular archivos de contabilidad en formato .ledger.",
+    description="Library for manipulating accounting files in .ledger format.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/EddyBel/Ledgerpy",  # Reemplaza con la URL de tu repositorio
