@@ -6,7 +6,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="ledger-cli-toolkit",
-    version="1.8.0",  # Cambia según el versionado de tu proyecto
+    version="1.8.3",  # Cambia según el versionado de tu proyecto
     author="Eduardo Rangel",
     author_email="dante61918@gmail.com",
     description="Library for manipulating accounting files in .ledger format.",
